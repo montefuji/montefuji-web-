@@ -250,7 +250,10 @@ const [error, setError] = useState<string | null>(null);
     </div>
 
     <div className="col-5">
-      <div className="card">
+      <div className="card panel-tech">
+  <div className="panel-bg" />
+
+  <div className="panel-content">
         <div className="kicker">ENFOQUE</div>
 
         <div className="stack" style={{ marginTop: 14 }}>
@@ -275,6 +278,7 @@ const [error, setError] = useState<string | null>(null);
           <DataRow k="CONTACTO" v="info@montefuji.org" />
           <DataRow k="TEL" v="+56 9 40018651" />
           <DataRow k="ZONA" v="Centro-sur de Chile" />
+          </div>
         </div>
       </div>
     </div>
