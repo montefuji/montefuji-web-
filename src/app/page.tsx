@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useMemo, useState } from "react";
@@ -76,47 +77,24 @@ const FAQ = [
     q: "¿Venden por catálogo completo?",
     a: "No. Trabajamos por referencias núcleo (pick-ups y SUVs) y ampliamos solo cuando el estándar se cumple.",
   },
-  {
-    q: "¿Ofrecen marca privada (private label)?",
-    a: "Sí, para clientes alineados con el estándar y proceso de validación.",
-  },
+  { q: "¿Ofrecen marca privada (private label)?", a: "Sí, para clientes alineados con el estándar y proceso de validación." },
 ];
 
 function Tag({ children }: { children: React.ReactNode }) {
   return <span className="tag">{children}</span>;
 }
 
-function SectionTitle({
-  kicker,
-  title,
-  desc,
-}: {
-  kicker?: string;
-  title: string;
-  desc?: string;
-}) {
+function SectionTitle({ kicker, title, desc }: { kicker?: string; title: string; desc?: string }) {
   return (
     <div>
       {kicker ? <div className="kicker">{kicker}</div> : null}
       <h2 className="h2">{title}</h2>
-      {desc ? (
-        <p className="p" style={{ marginTop: 10 }}>
-          {desc}
-        </p>
-      ) : null}
+      {desc ? <p className="p" style={{ marginTop: 10 }}>{desc}</p> : null}
     </div>
   );
 }
 
-function TechBlock({
-  icon,
-  title,
-  desc,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  desc: string;
-}) {
+function TechBlock({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
   return (
     <div className="box">
       <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
@@ -135,19 +113,36 @@ function TechBlock({
         </div>
         <div>
           <div style={{ fontSize: 14, fontWeight: 600 }}>{title}</div>
-          <div
-            style={{
-              fontSize: 14,
-              color: "#4b5563",
-              marginTop: 4,
-              lineHeight: 1.5,
-            }}
-          >
-            {desc}
-          </div>
+          <div style={{ fontSize: 14, color: "#4b5563", marginTop: 4, lineHeight: 1.5 }}>{desc}</div>
         </div>
       </div>
     </div>
+  );
+}
+
+function Field({
+  label,
+  placeholder,
+  value,
+  onChange,
+  mono = false,
+}: {
+  label: string;
+  placeholder?: string;
+  value: string;
+  onChange: (v: string) => void;
+  mono?: boolean;
+}) {
+  return (
+    <label className="field">
+      <div className="label">{label}</div>
+      <input
+        className={"input " + (mono ? "font-mono" : "")}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </label>
   );
 }
 
@@ -155,13 +150,17 @@ function DataRow({ k, v }: { k: string; v: string }) {
   return (
     <div className="row">
       <div className="row-k">{k}</div>
-      <div className="row-v font-mono">{v}</div>
+      <div className={"row-v font-mono"}>{v}</div>
     </div>
   );
 }
 
 export default function Page() {
   const [query, setQuery] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [empresa, setEmpresa] = useState("");
+  const [email, setEmail] = useState("");
+  const [mensaje, setMensaje] = useState("");
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -169,14 +168,17 @@ export default function Page() {
   const filtrado = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return PRODUCTOS;
-
     return PRODUCTOS.map((cat) => ({
       ...cat,
-      items: cat.items.filter((i) =>
-        (i.nombre + " " + i.desc).toLowerCase().includes(q)
-      ),
+      items: cat.items.filter((i) => (i.nombre + " " + i.desc).toLowerCase().includes(q)),
     })).filter((cat) => cat.items.length > 0);
   }, [query]);
+
+  const mailto = useMemo(() => {
+    const subject = encodeURIComponent("Consulta – Montefuji");
+    const body = encodeURIComponent(`Nombre: ${nombre}\nEmpresa: ${empresa}\nEmail: ${email}\n\nMensaje:\n${mensaje}`);
+    return `mailto:info@montefuji.org?subject=${subject}&body=${body}`;
+  }, [nombre, empresa, email, mensaje]);
 
   return (
     <>
@@ -221,27 +223,18 @@ export default function Page() {
 
             <div style={{ marginTop: 16, maxWidth: 720 }}>
               <p className="p" style={{ margin: 0 }}>
-                Taller especializado en homocinéticas, semiejes y dirección para
-                pick-ups y SUVs.
+                Taller especializado en homocinéticas, semiejes y dirección para pick-ups y SUVs.
               </p>
 
               <p className="p" style={{ marginTop: 10 }}>
-                Seleccionamos y validamos referencias núcleo bajo el estándar
-                Montefuji:{" "}
+                Seleccionamos y validamos referencias núcleo bajo el estándar Montefuji:{" "}
                 <span style={{ fontWeight: 600 }}>
                   NVH · Ajuste · Consistencia lote a lote
                 </span>
               </p>
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 12,
-                marginTop: 22,
-              }}
-            >
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 22 }}>
               <a href="#productos" className="btn btn-primary">
                 Ver portafolio <ChevronRight size={16} />
               </a>
@@ -251,54 +244,36 @@ export default function Page() {
             </div>
           </div>
 
-    <div className="col-5">
-  <div className="card" style={{ display: "flex", gap: 16 }}>
+          <div className="col-5">
+            <div className="card">
+              <div className="kicker">ENFOQUE</div>
 
-    {/* IZQUIERDA → IMAGEN */}
-    <div style={{ width: "40%" }}>
-      <img
-        src="/montefuji-tech.png"
-        alt=""
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          opacity: 0.2,
-        }}
-      />
-    </div>
+              <div className="stack" style={{ marginTop: 14 }}>
+                <TechBlock
+                  icon={<Wrench size={18} />}
+                  title="Validación práctica y NVH"
+                  desc="Evaluamos ruido, vibración y aspereza (NVH), ajuste y comportamiento real en vehículo antes de aprobar una referencia."
+                />
+                <TechBlock
+                  icon={<Boxes size={18} />}
+                  title="Referencias núcleo"
+                  desc="Forester, Hilux, L200, Ranger, X-Trail, Tucson, Santa Fe, CV-R y otros núcleos."
+                />
+                <TechBlock
+                  icon={<ShieldCheck size={18} />}
+                  title="Consistencia lote a lote"
+                  desc="La referencia que validamos debe repetirse en cada lote: mismo ajuste, mismo comportamiento y mismo desempeño NVH."
+                />
+              </div>
 
-    {/* DERECHA → CONTENIDO */}
-    <div style={{ width: "60%" }}>
-      <div className="kicker">ENFOQUE</div>
-
-      <div className="stack" style={{ marginTop: 14 }}>
-        <TechBlock
-          icon={<Wrench size={18} />}
-          title="Validación práctica y NVH"
-          desc="Evaluamos ruido, vibración y aspereza (NVH), ajuste y comportamiento real en vehículo antes de aprobar una referencia."
-        />
-        <TechBlock
-          icon={<Boxes size={18} />}
-          title="Referencias núcleo"
-          desc="Forester, Hilux, L200, Ranger, X-Trail, Tucson, Santa Fe, CR-V y otros núcleos."
-        />
-        <TechBlock
-          icon={<ShieldCheck size={18} />}
-          title="Consistencia lote a lote"
-          desc="La referencia que validamos debe repetirse en cada lote: mismo ajuste, mismo comportamiento y mismo desempeño NVH."
-        />
-      </div>
-
-      <div className="panel-soft" style={{ marginTop: 16 }}>
-        <DataRow k="CONTACTO" v="info@montefuji.org" />
-        <DataRow k="TEL" v="+56 9 40018651" />
-        <DataRow k="ZONA" v="Centro-sur de Chile" />
-      </div>
-    </div>
-
-  </div>
-</div>
+              <div className="panel-soft" style={{ marginTop: 16 }}>
+                <DataRow k="CONTACTO" v="info@montefuji.org" />
+                <DataRow k="TEL" v="+56 9 40018651" />
+                <DataRow k="ZONA" v="Centro-sur de Chile" />
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="productos" className="section white">
@@ -323,8 +298,7 @@ export default function Page() {
                 />
               </div>
               <div style={{ marginTop: 8, fontSize: 12, color: "var(--muted)" }}>
-                Tip: usa códigos OEM. Ej.:{" "}
-                <span className="font-mono">43405</span>,{" "}
+                Tip: usa códigos OEM. Ej.: <span className="font-mono">43405</span>,{" "}
                 <span className="font-mono">Hilux</span>.
               </div>
             </div>
@@ -364,12 +338,11 @@ export default function Page() {
               ¿Necesitas una referencia o un servicio específico?
             </div>
             <p className="p" style={{ marginTop: 6 }}>
-              Cuéntanos modelo/año/motor, posición (LH/RH · inner/outer) y/o
-              número OEM, o el síntoma que estás diagnosticando. Revisamos el caso
-              y te orientamos con claridad.
+              Cuéntanos modelo/año/motor, posición (LH/RH · inner/outer) y/o número OEM,
+              o el síntoma que estás diagnosticando. Revisamos el caso y te orientamos con claridad..
             </p>
             <a href="#contacto" className="btn btn-primary" style={{ marginTop: 12 }}>
-              Contactar <ChevronRight size={16} />
+              contactar <ChevronRight size={16} />
             </a>
           </div>
         </div>
@@ -384,28 +357,15 @@ export default function Page() {
           />
 
           <div className="grid-2" style={{ marginTop: 18 }}>
-            <TechBlock
-              icon={<ShieldCheck size={18} />}
-              title="NVH"
-              desc="Sin ruidos anómalos, sin vibración indebida, sensación uniforme."
-            />
-            <TechBlock
-              icon={<Wrench size={18} />}
-              title="Ajuste y tolerancias"
-              desc="Juego y montaje dentro de rango. Movimiento fluido, sin forzar."
-            />
-            <TechBlock
-              icon={<Boxes size={18} />}
-              title="Consistencia"
-              desc="Muestra = repuesto. Cero cambios sin aviso y trazabilidad mínima."
-            />
+            <TechBlock icon={<ShieldCheck size={18} />} title="NVH" desc="Sin ruidos anómalos, sin vibración indebida, sensación uniforme." />
+            <TechBlock icon={<Wrench size={18} />} title="Ajuste y tolerancias" desc="Juego y montaje dentro de rango. Movimiento fluido, sin forzar." />
+            <TechBlock icon={<Boxes size={18} />} title="Consistencia" desc="Muestra = repuesto. Cero cambios sin aviso y trazabilidad mínima." />
           </div>
 
           <div className="card" style={{ marginTop: 18 }}>
             <div className="kicker">REGLA FUNDACIONAL</div>
             <p className="p" style={{ marginTop: 10, color: "#111" }}>
-              El criterio Montefuji nace en el banco desarmando una homocinética y
-              en el torno produciendo o ajustando una.
+              El criterio Montefuji nace en el banco desarmando una homocinética y en el torno produciendo o ajustando una.
             </p>
           </div>
         </div>
@@ -422,9 +382,7 @@ export default function Page() {
           <div className="grid-12" style={{ marginTop: 18 }}>
             <div className="col-6">
               <div className="panel-soft">
-                <div style={{ fontSize: 14, fontWeight: 600 }}>
-                  Servicios técnicos
-                </div>
+                <div style={{ fontSize: 14, fontWeight: 600 }}>Servicios técnicos</div>
 
                 <div className="stack" style={{ marginTop: 12 }}>
                   <TechBlock
@@ -453,12 +411,9 @@ export default function Page() {
 
             <div className="col-6">
               <div className="card">
-                <div style={{ fontSize: 14, fontWeight: 600 }}>
-                  Taller Montefuji
-                </div>
+                <div style={{ fontSize: 14, fontWeight: 600 }}>Taller Montefuji</div>
                 <p className="p" style={{ marginTop: 8 }}>
-                  Instalación y diagnóstico enfocados en transmisión, dirección y
-                  tren delantero. Trabajo limpio, sin improvisación.
+                  Instalación y diagnóstico enfocados en transmisión, dirección y tren delantero. Trabajo limpio, sin improvisación.
                 </p>
 
                 <div className="stack" style={{ marginTop: 12 }}>
@@ -486,10 +441,8 @@ export default function Page() {
 
                 <div className="panel-soft" style={{ marginTop: 14 }}>
                   <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.5 }}>
-                    <span style={{ fontWeight: 600 }}>Regla Montefuji:</span> No
-                    hacemos “mecánica general”. Nos enfocamos en transmisión,
-                    dirección y tren delantero porque ahí se juega el NVH, el ajuste
-                    y la seguridad.
+                    <span style={{ fontWeight: 600 }}>Regla Montefuji:</span> No hacemos “mecánica general”. Nos enfocamos en transmisión,
+                    dirección y tren delantero porque ahí se juega el NVH, el ajuste y la seguridad.
                   </div>
                 </div>
 
@@ -513,15 +466,7 @@ export default function Page() {
           <div className="grid-2" style={{ marginTop: 18 }}>
             <div className="panel-soft">
               <div style={{ fontSize: 14, fontWeight: 600 }}>Cómo trabajamos</div>
-              <ul
-                style={{
-                  marginTop: 10,
-                  marginBottom: 0,
-                  paddingLeft: 18,
-                  color: "#374151",
-                  lineHeight: 1.6,
-                }}
-              >
+              <ul style={{ marginTop: 10, marginBottom: 0, paddingLeft: 18, color: "#374151", lineHeight: 1.6 }}>
                 <li>Selección de referencias núcleo (pick-ups y SUVs).</li>
                 <li>Validación práctica y comparación con benchmark.</li>
                 <li>Primero revisamos, luego decidimos y lo comunicamos con claridad.</li>
@@ -530,18 +475,14 @@ export default function Page() {
             </div>
 
             <div className="card">
-              <div style={{ fontSize: 14, fontWeight: 600 }}>
-                Para quienes estamos
-              </div>
+              <div style={{ fontSize: 14, fontWeight: 600 }}>Para quienes estamos</div>
 
               <p className="p" style={{ marginTop: 8 }}>
-                Para talleres y distribuidores que cuidan su clientela y priorizan
-                funcionamiento real por sobre precio.
+                Para talleres y distribuidores que cuidan su clientela y priorizan funcionamiento real por sobre precio.
               </p>
 
               <p className="p" style={{ marginTop: 8 }}>
-                Para dueñ@s de vehículos que buscan diagnóstico preciso y soluciones
-                duraderas.
+                Para dueñ@s de vehículos que buscan diagnóstico preciso y soluciones duraderas.
               </p>
 
               <div className="tags" style={{ marginTop: 12 }}>
@@ -573,8 +514,7 @@ export default function Page() {
                   <Phone size={16} style={{ color: "#6b7280" }} /> +56 9 40018651
                 </div>
                 <div className="iconline">
-                  <MapPin size={16} style={{ color: "#6b7280" }} /> Concepción ·
-                  Chile
+                  <MapPin size={16} style={{ color: "#6b7280" }} /> Concepción · Chile
                 </div>
               </div>
 
@@ -584,10 +524,7 @@ export default function Page() {
                   <DataRow k="MODELO/AÑO/MOTOR" v="Ej.: Hilux 2016 2.8" />
                   <DataRow k="POSICIÓN" v="LH/RH · INNER/OUTER" />
                   <DataRow k="OEM" v="Ej.: 43405-0K020" />
-                  <DataRow
-                    k="SERVICIO"
-                    v="Ej.: Cambio de fuelle / Diagnóstico / Cremallera / Bomba"
-                  />
+                  <DataRow k="SERVICIO" v="Ej.: Cambio de fuelle / Diagnóstico / Cremallera / Bomba" />
                 </div>
               </div>
             </div>
@@ -631,21 +568,12 @@ export default function Page() {
                 >
                   <label className="field">
                     <div className="label">NOMBRE</div>
-                    <input
-                      name="nombre"
-                      className="input"
-                      placeholder="Tu nombre"
-                      required
-                    />
+                    <input name="nombre" className="input" placeholder="Tu nombre" required />
                   </label>
 
                   <label className="field">
                     <div className="label">EMPRESA / TALLER</div>
-                    <input
-                      name="empresa"
-                      className="input"
-                      placeholder="Nombre de empresa"
-                    />
+                    <input name="empresa" className="input" placeholder="Nombre de empresa" />
                   </label>
 
                   <label className="field">
