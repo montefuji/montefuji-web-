@@ -251,45 +251,54 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="col-5">
-            <div
-              className="card"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)), url('/montefuji-tech.png')",
-                backgroundSize: "cover",
-                backgroundPosition: "right center",
-                backgroundRepeat: "no-repeat",
-              }}
-            >
-              <div className="kicker">ENFOQUE</div>
+    <div className="col-5">
+  <div className="card" style={{ display: "flex", gap: 16 }}>
 
-              <div className="stack" style={{ marginTop: 14 }}>
-                <TechBlock
-                  icon={<Wrench size={18} />}
-                  title="Validación práctica y NVH"
-                  desc="Evaluamos ruido, vibración y aspereza (NVH), ajuste y comportamiento real en vehículo antes de aprobar una referencia."
-                />
-                <TechBlock
-                  icon={<Boxes size={18} />}
-                  title="Referencias núcleo"
-                  desc="Forester, Hilux, L200, Ranger, X-Trail, Tucson, Santa Fe, CR-V y otros núcleos."
-                />
-                <TechBlock
-                  icon={<ShieldCheck size={18} />}
-                  title="Consistencia lote a lote"
-                  desc="La referencia que validamos debe repetirse en cada lote: mismo ajuste, mismo comportamiento y mismo desempeño NVH."
-                />
-              </div>
+    {/* IZQUIERDA → IMAGEN */}
+    <div style={{ width: "40%" }}>
+      <img
+        src="/montefuji-tech.png"
+        alt=""
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          opacity: 0.2,
+        }}
+      />
+    </div>
 
-              <div className="panel-soft" style={{ marginTop: 16 }}>
-                <DataRow k="CONTACTO" v="info@montefuji.org" />
-                <DataRow k="TEL" v="+56 9 40018651" />
-                <DataRow k="ZONA" v="Centro-sur de Chile" />
-              </div>
-            </div>
-          </div>
-        </div>
+    {/* DERECHA → CONTENIDO */}
+    <div style={{ width: "60%" }}>
+      <div className="kicker">ENFOQUE</div>
+
+      <div className="stack" style={{ marginTop: 14 }}>
+        <TechBlock
+          icon={<Wrench size={18} />}
+          title="Validación práctica y NVH"
+          desc="Evaluamos ruido, vibración y aspereza (NVH), ajuste y comportamiento real en vehículo antes de aprobar una referencia."
+        />
+        <TechBlock
+          icon={<Boxes size={18} />}
+          title="Referencias núcleo"
+          desc="Forester, Hilux, L200, Ranger, X-Trail, Tucson, Santa Fe, CR-V y otros núcleos."
+        />
+        <TechBlock
+          icon={<ShieldCheck size={18} />}
+          title="Consistencia lote a lote"
+          desc="La referencia que validamos debe repetirse en cada lote: mismo ajuste, mismo comportamiento y mismo desempeño NVH."
+        />
+      </div>
+
+      <div className="panel-soft" style={{ marginTop: 16 }}>
+        <DataRow k="CONTACTO" v="info@montefuji.org" />
+        <DataRow k="TEL" v="+56 9 40018651" />
+        <DataRow k="ZONA" v="Centro-sur de Chile" />
+      </div>
+    </div>
+
+  </div>
+</div>
       </section>
 
       <section id="productos" className="section white">
