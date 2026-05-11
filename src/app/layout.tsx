@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Inter, IBM_Plex_Mono } from "next/font/google";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://montefuji.org";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.montefuji.org";
 const siteName = "Montefuji";
 const siteDescription =
   "Especialistas en homocinéticas, semiejes, fuelles y reparación de dirección hidráulica en Concepción. Atención para pick-ups, SUVs, talleres y particulares.";
