@@ -1,18 +1,53 @@
-
 "use client";
 
+import Image from "next/image";
 import React, { useMemo, useState } from "react";
-import { Mail, Phone, MapPin, ShieldCheck, Wrench, Boxes, ChevronRight, Search } from "lucide-react";
+import {
+  Boxes,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
+  ClipboardCheck,
+  FileText,
+  Gauge,
+  Mail,
+  MessageCircle,
+  MapPin,
+  Phone,
+  Ruler,
+  Search,
+  ShieldCheck,
+  Wrench,
+} from "lucide-react";
+
+const WHATSAPP_MESSAGE =
+  "Hola Montefuji, necesito cotizar.%0A%0AVehiculo:%0AAno:%0AMotor:%0APosicion (LH/RH - interior/exterior):%0AOEM o referencia:%0ACiudad:";
+const WHATSAPP_URL = `https://wa.me/56950995385?text=${WHATSAPP_MESSAGE}`;
+const SALES_ADDRESS = "Salas 566";
+const WORKSHOP_ADDRESS = "Colo Colo 922";
+const BUSINESS_HOURS = "Lunes a viernes: 9:30 a 18:30 · Sábado: coordinar por WhatsApp";
+const SALES_MAP_URL =
+  "https://www.google.com/maps/search/?api=1&query=Salas%20566%2C%20Concepcion%2C%20Chile";
+const WORKSHOP_MAP_URL =
+  "https://www.google.com/maps/search/?api=1&query=Colo%20Colo%20922%2C%20Concepcion%2C%20Chile";
+const MAP_EMBED_URL =
+  "https://www.google.com/maps?q=Salas%20566%2C%20Concepcion%2C%20Chile&output=embed";
 
 function Logo() {
   return (
-    <img
+    <Image
       src="/montefuji-logo.png"
       alt="Montefuji"
+      width={302}
+      height={151}
+      priority
       style={{ height: 76, width: "auto", display: "block" }}
     />
   );
 }
+
+
+
 
 const PRODUCTOS = [
   {
@@ -20,7 +55,7 @@ const PRODUCTOS = [
     items: [
       {
         nombre: "Kit junta homocinética exterior",
-        desc: "Kit completo (guardapolvo, grasa, abrazaderas, tuerca). Referencias núcleo para pick-ups y SUVs.",
+        desc: "Kit completo (fuelle, grasa, abrazaderas, tuerca). Referencias núcleo para pick-ups y SUVs.",
       },
       {
         nombre: "Kit junta homocinética interior",
@@ -33,10 +68,10 @@ const PRODUCTOS = [
     ],
   },
   {
-    categoria: "CV Boots y Abrazaderas",
+    categoria: "Fuelles y Abrazaderas",
     items: [
       {
-        nombre: "Guardapolvos (boots)",
+        nombre: "Fuelles homocinéticos",
         desc: "NBR / TPE / TPU con validación térmica y consistencia de compuesto.",
       },
       {
@@ -44,40 +79,120 @@ const PRODUCTOS = [
         desc: "Cierre firme, retención estable y sin deformación.",
       },
       {
-        nombre: "Grasa técnica para cambio de fuelle",
-        desc: "Formulación compatible con aplicaciones CV. Estabilidad térmica y adherencia adecuadas para trabajos de reemplazo de guardapolvo.",
-      },
+  nombre: "Grasa técnica para cambio de fuelle",
+  desc: "Formulación compatible con aplicaciones CV. Estabilidad térmica y adherencia adecuadas para trabajos de reemplazo de fuelle.",
+},
     ],
   },
   {
-    categoria: "Dirección hidráulica",
-    items: [
-      {
-        nombre: "Servicio de cremalleras hidráulicas",
-        desc: "Reacondicionamiento con control de estanqueidad, juego y comportamiento dinámico.",
-      },
-      {
-        nombre: "Bombas de dirección hidráulica",
-        desc: "Referencias seleccionadas bajo criterio de presión, caudal y confiabilidad en operación.",
-      },
-      {
-        nombre: "Terminales, rótulas y sellos",
-        desc: "Componentes de dirección con control de ajuste, retención y durabilidad en montaje real.",
-      },
-    ],
-  },
+  categoria: "Dirección hidráulica",
+  items: [
+    {
+      nombre: "Servicio de cremalleras hidráulicas",
+      desc: "Reacondicionamiento con control de estanqueidad, juego y comportamiento dinámico.",
+    },
+    {
+      nombre: "Bombas de dirección hidráulica",
+      desc: "Referencias seleccionadas bajo criterio de presión, caudal y confiabilidad en operación.",
+    },
+    {
+      nombre: "Terminales, rótulas y sellos",
+      desc: "Componentes de dirección con control de ajuste, retención y durabilidad en montaje real.",
+    },
+  ],
+},
 ];
 
 const FAQ = [
   {
-    q: "¿Qué hace diferente a Montefuji?",
-    a: "Marca técnica nacida del taller. Priorizamos NVH, ajuste y consistencia. No vendemos lo que no entendemos.",
+    q: "¿Cómo identifican la homocinética correcta?",
+    a: "Cruzamos modelo, año, motor, posición, estrías, medidas y OEM cuando existe.",
   },
   {
-    q: "¿Venden por catálogo completo?",
-    a: "No. Trabajamos por referencias núcleo (pick-ups y SUVs) y ampliamos solo cuando el estándar se cumple.",
+    q: "¿Síntomas de falla en homocinética?",
+    a: "Ruido al doblar, golpe al acelerar, vibración en carga, juego o fuelle roto con grasa.",
   },
-  { q: "¿Ofrecen marca privada (private label)?", a: "Sí, para clientes alineados con el estándar y proceso de validación." },
+  {
+    q: "¿Qué pasa si hay dos piezas parecidas?",
+    a: "Comparamos medidas y montaje real antes de vender. No forzamos una referencia dudosa.",
+  },
+  {
+    q: "¿Síntomas de dirección hidráulica?",
+    a: "Fuga, zumbido de bomba, volante duro, juego, ruido o retorno irregular.",
+  },
+  {
+    q: "¿Conviene reparar o cambiar completo?",
+    a: "Depende del desgaste, juego, fuelle, eje y costo total. Te orientamos caso a caso.",
+  },
+  {
+    q: "¿Por qué cambiar fuelles a tiempo?",
+    a: "Previene entrada de tierra y pérdida de grasa antes de dañar la junta.",
+  },
+];
+
+const PRODUCT_VISUALS = [
+  {
+    src: "/montefuji-cv-joint-schema.webp",
+    alt: "Plano técnico de junta homocinética",
+    width: 1000,
+    height: 1444,
+  },
+  {
+    src: "/montefuji-cv-boot-tech.webp",
+    alt: "Plano técnico de fuelle homocinético",
+    width: 1000,
+    height: 1444,
+  },
+  {
+    src: "/montefuji-steering-rack.webp",
+    alt: "Plano técnico de cremallera de dirección hidráulica",
+    width: 1600,
+    height: 792,
+  },
+];
+
+const GALLERY_SLIDES = [
+  {
+    src: "/montefuji-product-cv-kit.webp",
+    alt: "Kit de junta homocinética exterior con fuelle, tuerca, seguro y empaque",
+    label: "Kit de junta homocinética exterior",
+    width: 1086,
+    height: 1448,
+  },
+  {
+    src: "/montefuji-product-cv-joint.webp",
+    alt: "Junta homocinética exterior con estriado, corona ABS y accesorios",
+    label: "Junta homocinética exterior",
+    width: 1086,
+    height: 1448,
+  },
+  {
+    src: "/montefuji-product-boots.webp",
+    alt: "Fuelles homocinéticos de distintas medidas sobre mesón",
+    label: "Fuelles homocinéticos",
+    width: 1672,
+    height: 941,
+  },
+];
+
+const QUOTE_FIELDS = [
+  ["Vehiculo", "Marca, modelo, año y motor"],
+  ["Posicion", "LH/RH e interior/exterior"],
+  ["Referencia", "OEM, codigo alternativo o foto de la pieza"],
+  ["Sintoma", "Ruido, vibracion, fuelle roto, fuga o juego"],
+  ["Uso", "Taller, distribuidor o vehiculo particular"],
+  ["Zona", "Ciudad o comuna para coordinar entrega/servicio"],
+];
+
+const APPLICATIONS = [
+  "Toyota Hilux",
+  "Mitsubishi L200",
+  "Ford Ranger",
+  "Nissan X-Trail",
+  "Hyundai Tucson",
+  "Hyundai Santa Fe",
+  "Subaru Forester",
+  "Honda CR-V",
 ];
 
 function Tag({ children }: { children: React.ReactNode }) {
@@ -120,32 +235,6 @@ function TechBlock({ icon, title, desc }: { icon: React.ReactNode; title: string
   );
 }
 
-function Field({
-  label,
-  placeholder,
-  value,
-  onChange,
-  mono = false,
-}: {
-  label: string;
-  placeholder?: string;
-  value: string;
-  onChange: (v: string) => void;
-  mono?: boolean;
-}) {
-  return (
-    <label className="field">
-      <div className="label">{label}</div>
-      <input
-        className={"input " + (mono ? "font-mono" : "")}
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
-    </label>
-  );
-}
-
 function DataRow({ k, v }: { k: string; v: string }) {
   return (
     <div className="row">
@@ -157,10 +246,7 @@ function DataRow({ k, v }: { k: string; v: string }) {
 
 export default function Page() {
   const [query, setQuery] = useState("");
-  const [nombre, setNombre] = useState("");
-  const [empresa, setEmpresa] = useState("");
-  const [email, setEmail] = useState("");
-  const [mensaje, setMensaje] = useState("");
+  const [galleryIndex, setGalleryIndex] = useState(0);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -174,180 +260,389 @@ export default function Page() {
     })).filter((cat) => cat.items.length > 0);
   }, [query]);
 
-  const mailto = useMemo(() => {
-    const subject = encodeURIComponent("Consulta – Montefuji");
-    const body = encodeURIComponent(`Nombre: ${nombre}\nEmpresa: ${empresa}\nEmail: ${email}\n\nMensaje:\n${mensaje}`);
-    return `mailto:info@montefuji.org?subject=${subject}&body=${body}`;
-  }, [nombre, empresa, email, mensaje]);
+  const activeSlide = GALLERY_SLIDES[galleryIndex];
+  const showPreviousSlide = () => {
+    setGalleryIndex((current) => (current - 1 + GALLERY_SLIDES.length) % GALLERY_SLIDES.length);
+  };
+  const showNextSlide = () => {
+    setGalleryIndex((current) => (current + 1) % GALLERY_SLIDES.length);
+  };
 
   return (
     <>
       <header className="header">
-        <div
-          className="header-row"
-          style={{
-            minHeight: 96,
-            alignItems: "center",
-          }}
-        >
-          <Logo />
+  <div
+    className="header-row"
+    style={{
+      minHeight: 96,
+      alignItems: "center",
+    }}
+  >
+    <Logo />
 
-          <nav className="nav">
-            <a href="#productos">Productos</a>
-            <a href="#estandar">Estándar</a>
-            <a href="#servicios">Servicios</a>
-            <a href="#origen">Origen</a>
-            <a href="#contacto">Contacto</a>
-          </nav>
+    <nav className="nav">
+  <a href="#productos">Productos</a>
+  <a href="#galeria">Galería</a>
+  <a href="#estandar">Estándar</a>
+  <a href="#servicios">Servicios</a>          
+  <a href="#origen">Origen</a>
+  <a href="#cotizar">Cotizar</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contacto">Contacto</a>
+</nav>
 
-          <a href="#contacto" className="btn">
-            Cotizar <ChevronRight size={16} />
-          </a>
+
+    <a href={WHATSAPP_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
+      WhatsApp <MessageCircle size={16} />
+    </a>
+  </div>
+</header>
+
+      <a href={WHATSAPP_URL} className="whatsapp-float" target="_blank" rel="noreferrer">
+        <MessageCircle size={18} />
+        <span>Cotizar por WhatsApp</span>
+      </a>
+
+
+     {/* Intro */}
+<section className="container" style={{ paddingTop: 72, paddingBottom: 56 }}>
+    <div className="grid-12" style={{ alignItems: "start", rowGap: 24 }}>
+    <div className="col-7">
+      <div className="tags" style={{ marginBottom: 18 }}>
+        <Tag>Pick-ups & SUVs</Tag>
+        <Tag>NVH · Ajuste · Consistencia</Tag>
+        <Tag>Concepción · Chile</Tag>
+      </div>
+
+<h1 className="h1" style={{ maxWidth: 760, lineHeight: 1.12 }}>
+          Homocinéticas, semiejes y dirección hidráulica
+        <br />
+        en Concepción
+      </h1>
+
+      <div style={{ marginTop: 16, maxWidth: 720 }}>
+        <p className="p" style={{ margin: 0 }}>
+          Venta, diagnóstico y servicio técnico para pick-ups, SUVs, talleres y particulares.
+        </p>
+
+        <p className="p" style={{ marginTop: 10 }}>
+          Cuando importamos, seleccionamos y validamos referencias núcleo bajo el estándar Montefuji:{" "}
+          <span style={{ fontWeight: 600 }}>
+  NVH · Ajuste · Consistencia lote a lote
+</span>
+        </p>
+      </div>
+
+      <div className="spec-list" aria-label="Puntos fuertes Montefuji">
+        <div>
+          <Gauge size={18} />
+          <span>Diagnóstico NVH y comportamiento real</span>
         </div>
-      </header>
-
-      <section className="container" style={{ paddingTop: 72, paddingBottom: 56 }}>
-        <div className="grid-12" style={{ alignItems: "start", rowGap: 24 }}>
-          <div className="col-7">
-            <div className="tags" style={{ marginBottom: 18 }}>
-              <Tag>Pick-ups & SUVs</Tag>
-              <Tag>NVH · Ajuste · Consistencia</Tag>
-              <Tag>Concepción · Chile</Tag>
-            </div>
-
-            <h1 className="h1" style={{ maxWidth: 760, lineHeight: 1.12 }}>
-              Homocinéticas, semiejes y dirección
-              <br />
-              para pick-ups y SUVs
-            </h1>
-
-            <div style={{ marginTop: 16, maxWidth: 720 }}>
-              <p className="p" style={{ margin: 0 }}>
-                Taller especializado en homocinéticas, semiejes y dirección para pick-ups y SUVs.
-              </p>
-
-              <p className="p" style={{ marginTop: 10 }}>
-                Seleccionamos y validamos referencias núcleo bajo el estándar Montefuji:{" "}
-                <span style={{ fontWeight: 600 }}>
-                  NVH · Ajuste · Consistencia lote a lote
-                </span>
-              </p>
-            </div>
-
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 22 }}>
-              <a href="#productos" className="btn btn-primary">
-                Ver portafolio <ChevronRight size={16} />
-              </a>
-              <a href="#estandar" className="btn">
-                Estándar <ShieldCheck size={16} />
-              </a>
-            </div>
-          </div>
-
-          <div className="col-5">
-            <div className="card">
-              <div className="kicker">ENFOQUE</div>
-
-              <div className="stack" style={{ marginTop: 14 }}>
-                <TechBlock
-                  icon={<Wrench size={18} />}
-                  title="Validación práctica y NVH"
-                  desc="Evaluamos ruido, vibración y aspereza (NVH), ajuste y comportamiento real en vehículo antes de aprobar una referencia."
-                />
-                <TechBlock
-                  icon={<Boxes size={18} />}
-                  title="Referencias núcleo"
-                  desc="Forester, Hilux, L200, Ranger, X-Trail, Tucson, Santa Fe, CV-R y otros núcleos."
-                />
-                <TechBlock
-                  icon={<ShieldCheck size={18} />}
-                  title="Consistencia lote a lote"
-                  desc="La referencia que validamos debe repetirse en cada lote: mismo ajuste, mismo comportamiento y mismo desempeño NVH."
-                />
-              </div>
-
-              <div className="panel-soft" style={{ marginTop: 16 }}>
-                <DataRow k="CONTACTO" v="info@montefuji.org" />
-                <DataRow k="TEL" v="+56 9 40018651" />
-                <DataRow k="ZONA" v="Centro-sur de Chile" />
-              </div>
-            </div>
-          </div>
+        <div>
+          <Ruler size={18} />
+          <span>Control de medidas, ajuste y tolerancias</span>
         </div>
-      </section>
+        <div>
+          <ClipboardCheck size={18} />
+          <span>Referencias seleccionadas antes de ofrecer</span>
+        </div>
+      </div>
 
-      <section id="productos" className="section white">
-        <div className="container">
-          <div className="grid-12" style={{ alignItems: "end" }}>
-            <div className="col-7">
-              <SectionTitle
-                kicker="PORTAFOLIO"
-                title="Catálogo seleccionado"
-                desc="Experiencia de taller aplicada al portafolio. Referencias núcleo: lo que funciona y se repite."
-              />
-            </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 22 }}>
+        <a href={WHATSAPP_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
+          Cotizar por WhatsApp <MessageCircle size={16} />
+        </a>
+        <a href="#productos" className="btn">
+          Ver portafolio <ChevronRight size={16} />
+        </a>
+        <a href="#estandar" className="btn">
+          Estándar <ShieldCheck size={16} />
+        </a>
+      </div>
+    </div>
 
-            <div className="col-5">
-              <div className="search-wrap">
-                <Search size={16} className="search-ico" />
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Buscar (OEM / modelo / boot / semieje)"
-                  className="search font-mono"
-                />
-              </div>
-              <div style={{ marginTop: 8, fontSize: 12, color: "var(--muted)" }}>
-                Tip: usa códigos OEM. Ej.: <span className="font-mono">43405</span>,{" "}
-                <span className="font-mono">Hilux</span>.
-              </div>
+    <div className="col-5">
+      <div className="card hero-card">
+        <figure className="hero-technical">
+          <Image
+            src="/montefuji-cv-axle.webp"
+            alt="Semieje completo con juntas homocinéticas"
+            width={1800}
+            height={554}
+            sizes="(min-width: 900px) 420px, 100vw"
+          />
+        </figure>
+
+        <div className="kicker">ENFOQUE</div>
+
+        <div className="stack" style={{ marginTop: 14 }}>
+          <TechBlock
+  icon={<Wrench size={18} />}
+  title="Validación práctica y NVH"
+  desc="Evaluamos ruido, vibración y aspereza (NVH), ajuste y comportamiento real en vehículo antes de aprobar una referencia."
+/>
+          <TechBlock
+            icon={<Boxes size={18} />}
+            title="Referencias núcleo"
+            desc="Forester, Hilux, L200, Ranger, X-Trail, Tucson, Santa Fe, CR-V y otros núcleos."
+          />
+          <TechBlock
+  icon={<ShieldCheck size={18} />}
+  title="Consistencia lote a lote"
+  desc="La referencia que validamos debe repetirse en cada lote: mismo ajuste, mismo comportamiento y mismo desempeño NVH."
+/>
+        </div>
+
+        <div className="panel-soft" style={{ marginTop: 16 }}>
+          <DataRow k="CONTACTO" v="info@montefuji.org" />
+          <DataRow k="TEL" v="+56 9 5099 5385" />
+          <DataRow k="VENTAS" v={SALES_ADDRESS} />
+          <DataRow k="TALLER" v={WORKSHOP_ADDRESS} />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      {/* Lámina técnica */}
+<section className="section technical-band">
+  <div className="container">
+    <div className="technical-layout">
+      <div>
+        <SectionTitle
+          kicker="LECTURA TÉCNICA"
+          title="Medidas, aplicación y criterio antes de vender"
+          desc="La selección correcta no parte por precio: parte por medidas, posición, estrías, fuelles, retenes y comportamiento en montaje real."
+        />
+
+        <div className="technical-points">
+          <TechBlock
+            icon={<Ruler size={18} />}
+            title="Dimensiones y geometría"
+            desc="Revisamos diámetros, largo efectivo, estrías y puntos de fijación para evitar montajes forzados."
+          />
+          <TechBlock
+            icon={<ClipboardCheck size={18} />}
+            title="Aplicación verificada"
+            desc="Cruce por OEM, modelo, año, motor y posición antes de recomendar una referencia."
+          />
+        </div>
+      </div>
+
+      <figure className="technical-plate">
+        <Image
+          src="/montefuji-cv-joint-tech.webp"
+          alt="Plano técnico de junta homocinética Montefuji"
+          width={837}
+          height={279}
+          sizes="(min-width: 900px) 620px, 100vw"
+        />
+      </figure>
+    </div>
+  </div>
+</section>
+
+      {/* Productos / Portafolio */}
+<section id="productos" className="section white">
+  <div className="container">
+    <div className="grid-12" style={{ alignItems: "end" }}>
+      <div className="col-7">
+        <SectionTitle
+  kicker="PORTAFOLIO"
+  title="Catálogo seleccionado"
+  desc="Experiencia de taller aplicada al portafolio. Referencias núcleo: lo que funciona y se repite."
+/>
+      </div>
+
+      <div className="col-5">
+        <div className="search-wrap">
+          <Search size={16} className="search-ico" />
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Buscar (OEM / modelo / fuelle / semieje)"
+            className="search font-mono"
+          />
+        </div>
+        <div style={{ marginTop: 8, fontSize: 12, color: "var(--muted)" }}>
+          Tip: usa códigos OEM. Ej.: <span className="font-mono">43405</span>,{" "}
+          <span className="font-mono">Hilux</span>.
+        </div>
+      </div>
+    </div>
+
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+    gap: 16,
+    marginTop: 18,
+  }}
+>
+  {filtrado.map((cat, index) => (
+    <div key={cat.categoria} className="panel-soft">
+      <figure className="product-visual">
+        <Image
+          src={PRODUCT_VISUALS[index % PRODUCT_VISUALS.length].src}
+          alt={PRODUCT_VISUALS[index % PRODUCT_VISUALS.length].alt}
+          width={PRODUCT_VISUALS[index % PRODUCT_VISUALS.length].width}
+          height={PRODUCT_VISUALS[index % PRODUCT_VISUALS.length].height}
+          sizes="(min-width: 900px) 320px, 100vw"
+        />
+      </figure>
+
+      <div style={{ fontSize: 14, fontWeight: 600 }}>
+        {cat.categoria}
+      </div>
+
+      <div className="stack" style={{ marginTop: 12 }}>
+        {cat.items.map((i) => (
+          <div key={i.nombre} className="item">
+            <p className="item-title">{i.nombre}</p>
+            <p className="item-desc">{i.desc}</p>
+            <div className="item-data font-mono">
+              OEM/REF · aplicación verificada
             </div>
           </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: 16,
-              marginTop: 18,
-            }}
-          >
-            {filtrado.map((cat) => (
-              <div key={cat.categoria} className="panel-soft">
-                <div style={{ fontSize: 14, fontWeight: 600 }}>
-                  {cat.categoria}
-                </div>
+    <div className="applications-block">
+      <div className="kicker">APLICACIONES FRECUENTES</div>
+      <div className="application-tags" aria-label="Modelos frecuentes">
+        {APPLICATIONS.map((application) => (
+          <Tag key={application}>{application}</Tag>
+        ))}
+      </div>
+    </div>
 
-                <div className="stack" style={{ marginTop: 12 }}>
-                  {cat.items.map((i) => (
-                    <div key={i.nombre} className="item">
-                      <p className="item-title">{i.nombre}</p>
-                      <p className="item-desc">{i.desc}</p>
-                      <div className="item-data font-mono">
-                        OEM/REF · aplicación verificada
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="panel-soft" style={{ marginTop: 18 }}>
-            <div style={{ fontSize: 14, fontWeight: 600 }}>
-              ¿Necesitas una referencia o un servicio específico?
-            </div>
-            <p className="p" style={{ marginTop: 6 }}>
-              Cuéntanos modelo/año/motor, posición (LH/RH · inner/outer) y/o número OEM,
-              o el síntoma que estás diagnosticando. Revisamos el caso y te orientamos con claridad..
+    <div id="cotizar" className="catalog-support">
+      <div className="panel-soft quote-panel">
+        <div className="quote-head">
+          <FileText size={18} />
+          <div>
+            <div style={{ fontSize: 14, fontWeight: 600 }}>Datos para cotizar</div>
+            <p className="p" style={{ marginTop: 4 }}>
+              Mientras más completa llega la información, más precisa es la respuesta.
             </p>
-            <a href="#contacto" className="btn btn-primary" style={{ marginTop: 12 }}>
-              contactar <ChevronRight size={16} />
-            </a>
           </div>
         </div>
-      </section>
 
+        <div className="quote-grid">
+          {QUOTE_FIELDS.map(([label, value]) => (
+            <div key={label} className="quote-row">
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="panel-soft warranty-panel">
+        <div className="quote-head">
+          <ShieldCheck size={18} />
+          <div>
+            <div style={{ fontSize: 14, fontWeight: 600 }}>Garantía técnica</div>
+            <p className="p" style={{ marginTop: 4 }}>
+              Validamos compatibilidad antes de vender. La garantía depende de una instalación correcta, pieza sin golpes y revisión del conjunto asociado.
+            </p>
+          </div>
+        </div>
+
+        <a href={WHATSAPP_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
+          Enviar datos por WhatsApp <MessageCircle size={16} />
+        </a>
+      </div>
+    </div>
+
+    <div className="panel-soft" style={{ marginTop: 18 }}>
+      <div style={{ fontSize: 14, fontWeight: 600 }}>
+        ¿Necesitas una referencia o un servicio específico?
+      </div>
+      <p className="p" style={{ marginTop: 6 }}>
+        Cuéntanos modelo/año/motor, posición (LH/RH · inner/outer) y/o número OEM,
+o el síntoma que estás diagnosticando. Revisamos el caso y te orientamos con claridad.
+      </p>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 12 }}>
+        <a href={WHATSAPP_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
+          WhatsApp <MessageCircle size={16} />
+        </a>
+        <a href="#contacto" className="btn">
+          Formulario <ChevronRight size={16} />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+      {/* Galería */}
+<section id="galeria" className="section white">
+  <div className="container">
+    <h2 className="h2">Galería</h2>
+
+      <div className="gallery-stage">
+        <button
+          type="button"
+          className="gallery-arrow gallery-arrow-left"
+          onClick={showPreviousSlide}
+          aria-label="Imagen anterior"
+        >
+          <ChevronLeft size={20} />
+        </button>
+
+        <figure className="gallery-figure">
+          <Image
+            key={activeSlide.src}
+            src={activeSlide.src}
+            alt={activeSlide.alt}
+            width={activeSlide.width}
+            height={activeSlide.height}
+            sizes="(min-width: 900px) 680px, 100vw"
+            priority={galleryIndex === 0}
+          />
+        </figure>
+
+        <button
+          type="button"
+          className="gallery-arrow gallery-arrow-right"
+          onClick={showNextSlide}
+          aria-label="Imagen siguiente"
+        >
+          <ChevronRight size={20} />
+        </button>
+
+        <div className="gallery-count font-mono">
+          {galleryIndex + 1}/{GALLERY_SLIDES.length}
+        </div>
+      </div>
+
+      <div className="gallery-thumbs" aria-label="Seleccionar imagen">
+        {GALLERY_SLIDES.map((slide, index) => (
+          <button
+            key={slide.src}
+            type="button"
+            className={`gallery-thumb ${index === galleryIndex ? "is-active" : ""}`}
+            onClick={() => setGalleryIndex(index)}
+            aria-label={slide.label}
+            aria-pressed={index === galleryIndex}
+          >
+            <Image
+              src={slide.src}
+              alt=""
+              width={120}
+              height={90}
+              sizes="80px"
+            />
+          </button>
+        ))}
+      </div>
+    </div>
+</section>
+
+      {/* Estándar */}
       <section id="estandar" className="section soft">
         <div className="container">
           <SectionTitle
@@ -371,90 +666,94 @@ export default function Page() {
         </div>
       </section>
 
+            {/* Servicios */}
       <section id="servicios" className="section white">
         <div className="container">
-          <SectionTitle
-            kicker="SERVICIOS"
-            title="Servicios técnicos y taller"
-            desc="Soporte práctico para talleres y distribuidores: validación, benchmarking y montaje enfocado en transmisión, dirección y tren delantero."
-          />
+        <SectionTitle
+          kicker="SERVICIOS"
+          title="Servicios técnicos y taller"
+          desc="Soporte práctico para talleres y distribuidores: validación, benchmarking y montaje enfocado en transmisión, dirección y tren delantero."
+        />
 
-          <div className="grid-12" style={{ marginTop: 18 }}>
+            <div className="grid-12" style={{ marginTop: 18 }}>
+            {/* Servicios técnicos */}
             <div className="col-6">
-              <div className="panel-soft">
-                <div style={{ fontSize: 14, fontWeight: 600 }}>Servicios técnicos</div>
+            <div className="panel-soft">
+          <div style={{ fontSize: 14, fontWeight: 600 }}>Servicios técnicos</div>
 
-                <div className="stack" style={{ marginTop: 12 }}>
-                  <TechBlock
-                    icon={<Search size={18} />}
-                    title="Validación de referencias"
-                    desc="Verificación por aplicación (OEM / modelo / año / posición). Confirmamos compatibilidad real antes del montaje."
-                  />
-                  <TechBlock
-                    icon={<Boxes size={18} />}
-                    title="Comparación y benchmarking"
-                    desc="Comparación contra original u otra referencia: ajuste, construcción y comportamiento NVH."
-                  />
-                  <TechBlock
-                    icon={<Wrench size={18} />}
-                    title="Desarrollo bajo estándar"
-                    desc="Referencias nuevas solo si cumplen el estándar Montefuji. Si no cumple, no se ofrece."
-                  />
-                  <TechBlock
-                    icon={<ShieldCheck size={18} />}
-                    title="Referencias seleccionadas"
-                    desc="Trabajadas con el mismo criterio que usamos en el taller: ajuste correcto, funcionamiento real y consistencia en el tiempo."
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="col-6">
-              <div className="card">
-                <div style={{ fontSize: 14, fontWeight: 600 }}>Taller Montefuji</div>
-                <p className="p" style={{ marginTop: 8 }}>
-                  Instalación y diagnóstico enfocados en transmisión, dirección y tren delantero. Trabajo limpio, sin improvisación.
-                </p>
-
-                <div className="stack" style={{ marginTop: 12 }}>
-                  <TechBlock
-                    icon={<Wrench size={18} />}
-                    title="Instalación de juntas (inner/outer)"
-                    desc="Montaje con torque, fijación, verificación de juego y prueba final."
-                  />
-                  <TechBlock
-                    icon={<Boxes size={18} />}
-                    title="Servicio de semieje / eje completo"
-                    desc="Revisión de estrías, retención, vibración y montaje correcto por lado/posición."
-                  />
-                  <TechBlock
-                    icon={<ShieldCheck size={18} />}
-                    title="Reparación de cremalleras de dirección hidráulica"
-                    desc="Recuperación de vástago, reemplazo de sellos y prueba hidráulica bajo carga (+100 bar)."
-                  />
-                  <TechBlock
-                    icon={<MapPin size={18} />}
-                    title="Revisión tren delantero y dirección (en contexto)"
-                    desc="Rótulas, terminales, bujes y rodamientos: solo lo que afecta el síntoma y la seguridad."
-                  />
-                </div>
-
-                <div className="panel-soft" style={{ marginTop: 14 }}>
-                  <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.5 }}>
-                    <span style={{ fontWeight: 600 }}>Regla Montefuji:</span> No hacemos “mecánica general”. Nos enfocamos en transmisión,
-                    dirección y tren delantero porque ahí se juega el NVH, el ajuste y la seguridad.
-                  </div>
-                </div>
-
-                <a href="#contacto" className="btn btn-primary" style={{ marginTop: 14 }}>
-                  Agendar diagnóstico <ChevronRight size={16} />
-                </a>
-              </div>
-            </div>
+            <div className="stack" style={{ marginTop: 12 }}>
+             <TechBlock
+              icon={<Search size={18} />}
+              title="Validación de referencias"
+              desc="Verificación por aplicación (OEM / modelo / año / posición). Confirmamos compatibilidad real antes del montaje."
+            />
+            <TechBlock
+              icon={<Boxes size={18} />}
+              title="Comparación y benchmarking"
+              desc="Comparación contra original u otra referencia: ajuste, construcción y comportamiento NVH."
+            />
+            <TechBlock
+              icon={<Wrench size={18} />}
+              title="Desarrollo bajo estándar"
+              desc="Referencias nuevas solo si cumplen el estándar Montefuji. Si no cumple, no se ofrece."
+            />
+            <TechBlock
+              icon={<ShieldCheck size={18} />}
+              title="Referencias seleccionadas"
+              desc="Trabajadas con el mismo criterio que usamos en el taller: ajuste correcto, funcionamiento real y consistencia en el tiempo."
+            />
           </div>
         </div>
-      </section>
+      </div>
 
+      {/* Taller */}
+      <div className="col-6">
+        <div className="card">
+          <div style={{ fontSize: 14, fontWeight: 600 }}>Taller Montefuji</div>
+          <p className="p" style={{ marginTop: 8 }}>
+            Instalación y diagnóstico enfocados en transmisión, dirección y tren delantero. Trabajo limpio, sin improvisación.
+          </p>
+
+          <div className="stack" style={{ marginTop: 12 }}>
+            <TechBlock
+              icon={<Wrench size={18} />}
+              title="Instalación de juntas (inner/outer)"
+              desc="Montaje con torque, fijación, verificación de juego y prueba final."
+            />
+            <TechBlock
+              icon={<Boxes size={18} />}
+              title="Servicio de semieje / eje completo"
+              desc="Revisión de estrías, retención, vibración y montaje correcto por lado/posición."
+            />
+           <TechBlock
+  icon={<ShieldCheck size={18} />}
+  title="Reparación de cremalleras de dirección hidráulica"
+  desc="Recuperación de vástago, reemplazo de sellos y prueba hidráulica bajo carga (+100 bar)."
+/>
+            <TechBlock
+              icon={<MapPin size={18} />}
+              title="Revisión tren delantero y dirección (en contexto)"
+              desc="Rótulas, terminales, bujes y rodamientos: solo lo que afecta el síntoma y la seguridad."
+            />
+          </div>
+
+          <div className="panel-soft" style={{ marginTop: 14 }}>
+            <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.5 }}>
+              <span style={{ fontWeight: 600 }}>Regla Montefuji:</span> No hacemos “mecánica general”. Nos enfocamos en transmisión,
+              dirección y tren delantero porque ahí se juega el NVH, el ajuste y la seguridad.
+            </div>
+          </div>
+
+          <a href="#contacto" className="btn btn-primary" style={{ marginTop: 14 }}>
+            Agendar diagnóstico <ChevronRight size={16} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      {/* Origen */}
       <section id="origen" className="section white">
         <div className="container">
           <SectionTitle
@@ -468,23 +767,44 @@ export default function Page() {
               <div style={{ fontSize: 14, fontWeight: 600 }}>Cómo trabajamos</div>
               <ul style={{ marginTop: 10, marginBottom: 0, paddingLeft: 18, color: "#374151", lineHeight: 1.6 }}>
                 <li>Selección de referencias núcleo (pick-ups y SUVs).</li>
-                <li>Validación práctica y comparación con benchmark.</li>
-                <li>Primero revisamos, luego decidimos y lo comunicamos con claridad.</li>
-                <li>Relación de largo plazo con proveedores y clientes.</li>
+<li>Validación práctica y comparación con benchmark.</li>
+<li>Primero revisamos, luego decidimos y lo comunicamos con claridad.</li>
+<li>Relación de largo plazo con proveedores y clientes.</li>
               </ul>
             </div>
 
             <div className="card">
+              <figure className="real-photo">
+                <Image
+                  src="/montefuji-real-cv-joints.webp"
+                  alt="Juntas homocinéticas en taller Montefuji"
+                  width={425}
+                  height={283}
+                  sizes="(min-width: 900px) 520px, 100vw"
+                />
+              </figure>
+
               <div style={{ fontSize: 14, fontWeight: 600 }}>Para quienes estamos</div>
 
-              <p className="p" style={{ marginTop: 8 }}>
-                Para talleres y distribuidores que cuidan su clientela y priorizan funcionamiento real por sobre precio.
-              </p>
+<p className="p" style={{ marginTop: 8 }}>
+  Para talleres y distribuidores que cuidan su clientela y priorizan funcionamiento real.
+</p>
 
-              <p className="p" style={{ marginTop: 8 }}>
-                Para dueñ@s de vehículos que buscan diagnóstico preciso y soluciones duraderas.
-              </p>
+<p className="p" style={{ marginTop: 8 }}>
+  Para dueñ@s de vehículos que buscan diagnóstico preciso y soluciones duraderas.
+</p>
 
+              <div className="client-types">
+                <div>
+                  <strong>Talleres multimarca</strong>
+                  <span>Soluciones en sistemas de tracción, dirección y tren delantero.</span>
+                </div>
+                <div>
+                  <strong>Público general</strong>
+                  <span>Reparar y aprender a mantener el tren delantero sin fallas.</span>
+                </div>
+              </div>
+              
               <div className="tags" style={{ marginTop: 12 }}>
                 <Tag>Transparencia</Tag>
                 <Tag>Disciplina</Tag>
@@ -496,141 +816,193 @@ export default function Page() {
         </div>
       </section>
 
-      <section id="contacto" className="section white">
+      {/* FAQ */}
+      <section id="faq" className="section soft">
         <div className="container">
           <div className="grid-12">
-            <div className="col-6">
+            <div className="col-5">
               <SectionTitle
-                kicker="CONTACTO"
-                title="Contacto"
-                desc="Cuéntanos tu necesidad (modelo/año/OEM) y zona. Te orientamos con criterio técnico."
+                kicker="PREGUNTAS"
+                title="Antes de cotizar"
+                desc="Respuestas cortas para cotizar sin perder tiempo."
               />
-
-              <div className="stack" style={{ marginTop: 16 }}>
-                <div className="iconline">
-                  <Mail size={16} style={{ color: "#6b7280" }} /> info@montefuji.org
-                </div>
-                <div className="iconline">
-                  <Phone size={16} style={{ color: "#6b7280" }} /> +56 9 40018651
-                </div>
-                <div className="iconline">
-                  <MapPin size={16} style={{ color: "#6b7280" }} /> Concepción · Chile
-                </div>
-              </div>
-
-              <div className="panel-soft" style={{ marginTop: 18 }}>
-                <div className="kicker">DATOS RECOMENDADOS</div>
-                <div style={{ marginTop: 8 }}>
-                  <DataRow k="MODELO/AÑO/MOTOR" v="Ej.: Hilux 2016 2.8" />
-                  <DataRow k="POSICIÓN" v="LH/RH · INNER/OUTER" />
-                  <DataRow k="OEM" v="Ej.: 43405-0K020" />
-                  <DataRow k="SERVICIO" v="Ej.: Cambio de fuelle / Diagnóstico / Cremallera / Bomba" />
-                </div>
-              </div>
             </div>
-
-            <div className="col-6">
-              <div className="panel-soft">
-                <div style={{ fontSize: 14, fontWeight: 600 }}>Formulario</div>
-
-                <form
-                  className="stack"
-                  style={{ marginTop: 14 }}
-                  onSubmit={async (e) => {
-                    e.preventDefault();
-                    setSending(true);
-                    setSent(false);
-                    setError(null);
-
-                    const form = e.currentTarget;
-                    const formData = new FormData(form);
-
-                    try {
-                      const res = await fetch("https://formspree.io/f/xlgwqrla", {
-                        method: "POST",
-                        headers: { Accept: "application/json" },
-                        body: formData,
-                      });
-
-                      if (res.ok) {
-                        setSent(true);
-                        form.reset();
-                      } else {
-                        const data = await res.json().catch(() => null);
-                        setError(data?.error || "No se pudo enviar. Intenta nuevamente.");
-                      }
-                    } catch {
-                      setError("Error de conexión. Revisa tu internet e intenta nuevamente.");
-                    } finally {
-                      setSending(false);
-                    }
-                  }}
-                >
-                  <label className="field">
-                    <div className="label">NOMBRE</div>
-                    <input name="nombre" className="input" placeholder="Tu nombre" required />
-                  </label>
-
-                  <label className="field">
-                    <div className="label">EMPRESA / TALLER</div>
-                    <input name="empresa" className="input" placeholder="Nombre de empresa" />
-                  </label>
-
-                  <label className="field">
-                    <div className="label">EMAIL</div>
-                    <input
-                      name="email"
-                      type="email"
-                      className="input font-mono"
-                      placeholder="correo@ejemplo.com"
-                      required
-                    />
-                  </label>
-
-                  <label className="field">
-                    <div className="label">MENSAJE</div>
-                    <textarea
-                      name="mensaje"
-                      className="textarea"
-                      rows={6}
-                      placeholder="Ej.: Hilux 2016 4x4 · junta exterior RH · OEM 43405-0K020"
-                      required
-                    />
-                  </label>
-
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    disabled={sending}
-                  >
-                    {sending ? "Enviando..." : "Enviar consulta"}{" "}
-                    <ChevronRight size={16} />
-                  </button>
-
-                  {sent ? (
-                    <div style={{ fontSize: 12, color: "var(--muted)" }}>
-                      ✅ Enviado correctamente. Te responderemos a tu correo.
-                    </div>
-                  ) : error ? (
-                    <div style={{ fontSize: 12, color: "var(--muted)" }}>
-                      ❗ {error}
-                    </div>
-                  ) : (
-                    <div style={{ fontSize: 12, color: "var(--muted)" }}>
-                      * Te responderemos a tu correo.
-                    </div>
-                  )}
-                </form>
+            <div className="col-7">
+              <div className="faq-list">
+                {FAQ.map((item) => (
+                  <div key={item.q} className="faq-item">
+                    <h3>{item.q}</h3>
+                    <p>{item.a}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-
-          <footer className="footer">
-            <div>© {new Date().getFullYear()} Montefuji. Todos los derechos reservados.</div>
-            <div>Hecho con criterio. Sin ruido.</div>
-          </footer>
         </div>
       </section>
+
+     {/* Contacto */}
+<section id="contacto" className="section white">
+  <div className="container">
+    <div className="grid-12">
+      {/* Columna izquierda: info */}
+      <div className="col-6">
+        <SectionTitle
+          kicker="CONTACTO"
+          title="Contacto"
+          desc="Cuéntanos tu necesidad (modelo/año/OEM) y zona. Te orientamos con criterio técnico."
+        />
+
+        <div className="stack" style={{ marginTop: 16 }}>
+          <div className="iconline">
+            <Mail size={16} style={{ color: "#6b7280" }} /> info@montefuji.org
+          </div>
+          <div className="iconline">
+            <Phone size={16} style={{ color: "#6b7280" }} /> +56 9 5099 5385
+          </div>
+          <a className="iconline" href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+            <MessageCircle size={16} style={{ color: "#6b7280" }} /> Cotizar por WhatsApp
+          </a>
+          <div className="iconline">
+            <MapPin size={16} style={{ color: "#6b7280" }} /> Concepción · Chile
+          </div>
+          <div className="iconline">
+            <Clock size={16} style={{ color: "#6b7280" }} /> {BUSINESS_HOURS}
+          </div>
+          <div className="iconline">
+            <MapPin size={16} style={{ color: "#6b7280" }} /> Ventas: {SALES_ADDRESS}
+          </div>
+          <div className="iconline">
+            <MapPin size={16} style={{ color: "#6b7280" }} /> Taller: {WORKSHOP_ADDRESS}
+          </div>
+        </div>
+
+        <div className="contact-locations">
+          <div className="location-card">
+            <strong>Ventas y atención comercial</strong>
+            <span>{SALES_ADDRESS}, Concepción</span>
+            <a href={SALES_MAP_URL} target="_blank" rel="noreferrer">
+              Ver mapa <ChevronRight size={14} />
+            </a>
+          </div>
+          <div className="location-card">
+            <strong>Taller técnico</strong>
+            <span>{WORKSHOP_ADDRESS}, Concepción</span>
+            <a href={WORKSHOP_MAP_URL} target="_blank" rel="noreferrer">
+              Ver mapa <ChevronRight size={14} />
+            </a>
+          </div>
+        </div>
+
+        <div className="map-frame" aria-label="Mapa de ubicación Montefuji">
+          <iframe
+            title="Mapa Montefuji en Concepción"
+            src={MAP_EMBED_URL}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
+
+      </div>
+
+      {/* Columna derecha: formulario */}
+      <div className="col-6">
+        <div className="panel-soft">
+          <div style={{ fontSize: 14, fontWeight: 600 }}>Formulario</div>
+
+          <form
+            className="stack"
+            style={{ marginTop: 14 }}
+            onSubmit={async (e) => {
+              e.preventDefault();
+              setSending(true);
+              setSent(false);
+              setError(null);
+
+              const form = e.currentTarget;
+              const formData = new FormData(form);
+
+              try {
+                const res = await fetch("https://formspree.io/f/xlgwqrla", {
+                  method: "POST",
+                  headers: { Accept: "application/json" },
+                  body: formData,
+                });
+
+                if (res.ok) {
+                  setSent(true);
+                  form.reset();
+                } else {
+                  const data = await res.json().catch(() => null);
+                  setError(data?.error || "No se pudo enviar. Intenta nuevamente.");
+                }
+              } catch {
+                setError("Error de conexión. Revisa tu internet e intenta nuevamente.");
+              } finally {
+                setSending(false);
+              }
+            }}
+          >
+            <label className="field">
+              <div className="label">NOMBRE</div>
+              <input name="nombre" className="input" placeholder="Tu nombre" required />
+            </label>
+
+            <label className="field">
+              <div className="label">EMPRESA / TALLER</div>
+              <input name="empresa" className="input" placeholder="Nombre de empresa" />
+            </label>
+
+            <label className="field">
+              <div className="label">EMAIL</div>
+              <input
+                name="email"
+                type="email"
+                className="input font-mono"
+                placeholder="correo@ejemplo.com"
+                required
+              />
+            </label>
+
+            <label className="field">
+              <div className="label">MENSAJE</div>
+              <textarea
+                name="mensaje"
+                className="textarea"
+                rows={6}
+                placeholder="Ej.: Hilux 2016 4x4 · junta exterior RH · OEM 43405-0K020"
+                required
+              />
+            </label>
+
+            <button type="submit" className="btn btn-primary" disabled={sending}>
+              {sending ? "Enviando..." : "Enviar consulta"} <ChevronRight size={16} />
+            </button>
+
+            {sent ? (
+              <div style={{ fontSize: 12, color: "var(--muted)" }}>
+                ✅ Enviado correctamente. Te responderemos a tu correo.
+              </div>
+            ) : error ? (
+              <div style={{ fontSize: 12, color: "var(--muted)" }}>
+                ❗ {error}
+              </div>
+            ) : (
+              <div style={{ fontSize: 12, color: "var(--muted)" }}>
+                * Te responderemos a tu correo.
+              </div>
+            )}
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer className="footer">
+      <div>© {new Date().getFullYear()} Montefuji. Todos los derechos reservados.</div>
+      <div>Hecho con criterio. Sin ruido.</div>
+    </footer>
+  </div>
+</section>
     </>
   );
 }
