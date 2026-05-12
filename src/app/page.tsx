@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import React, { useMemo, useState } from "react";
+import Link from "next/link";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Boxes,
   ChevronLeft,
@@ -13,15 +14,18 @@ import {
   Mail,
   MessageCircle,
   MapPin,
+  Pause,
   Phone,
+  Play,
   Ruler,
   Search,
   ShieldCheck,
   Wrench,
 } from "lucide-react";
+import { SEO_LANDING_PAGES } from "./seo-pages";
 
 const WHATSAPP_MESSAGE =
-  "Hola Montefuji, necesito cotizar.%0A%0AVehiculo:%0AAno:%0AMotor:%0APosicion (LH/RH - interior/exterior):%0AOEM o referencia:%0ACiudad:";
+  "Hola Montefuji, necesito cotizar.%0A%0AVehiculo:%0AAno:%0AMotor:%0APosicion (LH/RH - interior/exterior):%0ASintoma:%0AOEM o referencia:%0ACiudad:";
 const WHATSAPP_URL = `https://wa.me/56950995385?text=${WHATSAPP_MESSAGE}`;
 const SALES_ADDRESS = "Salas 566";
 const WORKSHOP_ADDRESS = "Colo Colo 922";
@@ -105,28 +109,106 @@ const PRODUCTOS = [
 
 const FAQ = [
   {
-    q: "¿Cómo identifican la homocinética correcta?",
-    a: "Cruzamos modelo, año, motor, posición, estrías, medidas y OEM cuando existe.",
+    q: "¿Puedo cotizar solo con una foto?",
+    paragraphs: [
+      "La foto ayuda mucho como referencia visual, especialmente si se ve la pieza completa, el lado y el estado del fuelle o la junta.",
+      "Sin embargo, una foto por sí sola no basta para confirmar compatibilidad ni realizar un diagnóstico definitivo. En transmisión, dirección y homocinéticas, pequeños cambios de versión, medidas o estriado pueden cambiar completamente la pieza requerida.",
+    ],
   },
   {
-    q: "¿Síntomas de falla en homocinética?",
-    a: "Ruido al doblar, golpe al acelerar, vibración en carga, juego o fuelle roto con grasa.",
+    q: "¿Qué datos debo enviar por WhatsApp?",
+    paragraphs: ["Idealmente:"],
+    list: [
+      "VIN (número de chasis)",
+      "Marca, modelo y año",
+      "Motorización",
+      "Lado (piloto/copiloto)",
+      "Síntoma o falla",
+      "Fotos de la pieza o del vehículo",
+      "Código OEM si lo tienes",
+    ],
+    afterList: "Mientras más información recibimos, más precisa y rápida puede ser la revisión.",
   },
   {
-    q: "¿Qué pasa si hay dos piezas parecidas?",
-    a: "Comparamos medidas y montaje real antes de vender. No forzamos una referencia dudosa.",
+    q: "¿Por qué el VIN es importante?",
+    paragraphs: [
+      "El VIN permite identificar la configuración exacta del vehículo según catálogo original.",
+      "En transmisión, dirección y homocinéticas pueden existir diferencias de estriado, medidas, conexiones o versiones incluso dentro del mismo modelo y año. Revisar con VIN ayuda a reducir errores y mejorar la compatibilidad de la pieza correcta.",
+    ],
   },
   {
-    q: "¿Síntomas de dirección hidráulica?",
-    a: "Fuga, zumbido de bomba, volante duro, juego, ruido o retorno irregular.",
+    q: "¿Necesitan código OEM?",
+    paragraphs: [
+      "No siempre.",
+      "Si lo tienes, ayuda bastante porque reduce tiempos y evita errores. Si no, podemos revisar con VIN, datos técnicos y referencias reales de taller para buscar la pieza correcta.",
+    ],
   },
   {
-    q: "¿Conviene reparar o cambiar completo?",
-    a: "Depende del desgaste, juego, fuelle, eje y costo total. Te orientamos caso a caso.",
+    q: "¿Qué es el estriado y por qué importa?",
+    paragraphs: [
+      "El estriado corresponde a la cantidad y tipo de dientes que conectan la homocinética, semieje o eje con el vehículo.",
+      "En muchos modelos existen variaciones de estriado según versión, transmisión o motorización. Esa diferencia no siempre es visible externamente y puede cambiar completamente la compatibilidad de la pieza.",
+    ],
   },
   {
-    q: "¿Por qué cambiar fuelles a tiempo?",
-    a: "Previene entrada de tierra y pérdida de grasa antes de dañar la junta.",
+    q: "¿Atienden particulares y talleres?",
+    paragraphs: [
+      "Sí. Atendemos usuarios finales, talleres y distribuidores.",
+      "A particulares los orientamos para evitar compras incorrectas o cambios innecesarios. Con talleres y distribución trabajamos atención técnica según volumen o necesidad.",
+    ],
+  },
+  {
+    q: "¿Cuándo conviene cambiar solo el fuelle?",
+    paragraphs: [
+      "Lo ideal es cambiar el fuelle apenas presente grietas, pérdida de grasa o envejecimiento.",
+      "Un fuelle roto permite la entrada de tierra y humedad, lo que termina dañando la junta homocinética internamente. Si la pieza ya presenta ruido, juego o vibración, normalmente conviene revisar o reemplazar la homocinética completa.",
+    ],
+  },
+  {
+    q: "¿Trabajan dirección hidráulica?",
+    paragraphs: ["Sí.", "Trabajamos especialmente con:"],
+    list: [
+      "cajas de dirección",
+      "cremalleras",
+      "bombas",
+      "terminales y componentes asociados",
+    ],
+    afterList: "Según el caso, realizamos diagnóstico, reparación o revisión de compatibilidad.",
+  },
+  {
+    q: "¿Hacen diagnóstico en taller?",
+    paragraphs: ["Sí.", "Revisamos especialmente:"],
+    list: [
+      "transmisión",
+      "homocinéticas",
+      "dirección hidráulica",
+      "cajas de dirección",
+      "tren delantero",
+    ],
+    afterList: "La inspección presencial sigue siendo la forma más confiable de confirmar una falla antes de reemplazar piezas.",
+  },
+];
+
+const SYMPTOMS = [
+  {
+    title: "Ruido al doblar",
+    desc: "Chasquido o tac-tac al girar, típico de junta exterior con desgaste.",
+  },
+  {
+    title: "Vibración al acelerar",
+    desc: "Temblor bajo carga que puede venir de semieje, junta interior o montaje.",
+  },
+  {
+    title: "Golpe en cambios de carga",
+    desc: "Golpe al pasar de acelerar a retener, especialmente en pick-ups y SUVs.",
+  },
+  {
+    title: "Grasa en la rueda",
+    desc: "Fuelle roto o abrazadera suelta: conviene actuar antes de dañar la junta.",
+  },
+  {
+    title: "Volante duro o fuga",
+    desc: "Señal frecuente en dirección hidráulica, bomba, cremallera o sellos.",
   },
 ];
 
@@ -153,18 +235,11 @@ const PRODUCT_VISUALS = [
 
 const GALLERY_SLIDES = [
   {
-    src: "/montefuji-product-cv-kit.webp",
-    alt: "Kit de junta homocinética exterior con fuelle, tuerca, seguro y empaque",
-    label: "Kit de junta homocinética exterior",
-    width: 1086,
-    height: 1448,
-  },
-  {
-    src: "/montefuji-product-cv-joint.webp",
-    alt: "Junta homocinética exterior con estriado, corona ABS y accesorios",
-    label: "Junta homocinética exterior",
-    width: 1086,
-    height: 1448,
+    src: "/montefuji-carousel-01-1.jpg",
+    alt: "Junta homocinética GCK con certificación ISO/TS 16949 y componentes",
+    label: "Calidad certificada ISO/TS",
+    width: 1536,
+    height: 1024,
   },
   {
     src: "/montefuji-product-boots.webp",
@@ -172,6 +247,104 @@ const GALLERY_SLIDES = [
     label: "Fuelles homocinéticos",
     width: 1672,
     height: 941,
+  },
+  {
+    src: "/montefuji-carousel-01-2.jpg",
+    alt: "Funcionamiento de homocinética lado rueda y lado caja",
+    label: "Funcionamiento homocinética",
+    width: 1536,
+    height: 1024,
+  },
+  {
+    src: "/montefuji-carousel-02.jpg",
+    alt: "Falla por desgaste interno en junta homocinética",
+    label: "Desgaste interno CV",
+    width: 1536,
+    height: 1024,
+  },
+  {
+    src: "/montefuji-carousel-03.jpg",
+    alt: "Soluciones de semieje y homocinética en taller",
+    label: "Soluciones CV",
+    width: 1536,
+    height: 1024,
+  },
+  {
+    src: "/montefuji-gallery-semiejes-antes-despues.jpg",
+    alt: "Comparación antes y después de semiejes reparados",
+    label: "Semiejes antes y después",
+    width: 1536,
+    height: 1024,
+  },
+  {
+    src: "/montefuji-carousel-04.jpg",
+    alt: "Fabricación de eje de transmisión con estriado",
+    label: "Fabricación de eje",
+    width: 1536,
+    height: 1024,
+  },
+  {
+    src: "/montefuji-carousel-05.jpg",
+    alt: "Fuelle roto con pérdida de grasa en homocinética",
+    label: "Fuelle roto",
+    width: 1086,
+    height: 1448,
+  },
+  {
+    src: "/montefuji-carousel-06.jpg",
+    alt: "Variedad de fuelles homocinéticos de distintas medidas",
+    label: "Variedad de fuelles",
+    width: 1536,
+    height: 1024,
+  },
+  {
+    src: "/montefuji-gallery-abrazaderas-acero.jpg",
+    alt: "Abrazaderas de acero para fuelles homocinéticos sobre superficie de taller",
+    label: "Abrazaderas de acero",
+    width: 1536,
+    height: 1024,
+  },
+  {
+    src: "/montefuji-carousel-07.jpg",
+    alt: "Reparación de cremallera de dirección con sellos y fuelles",
+    label: "Reparación de cremallera",
+    width: 1694,
+    height: 929,
+  },
+  {
+    src: "/montefuji-carousel-08.jpg",
+    alt: "Recuperación de vástago de dirección hidráulica",
+    label: "Recuperación de vástago",
+    width: 1536,
+    height: 1024,
+  },
+  {
+    src: "/montefuji-carousel-09.jpg",
+    alt: "Prueba de sellado de dirección hidráulica a 120 bares",
+    label: "Prueba 120 bares",
+    width: 1536,
+    height: 1024,
+  },
+  {
+    src: "/montefuji-gallery-direccion-problema-solucion.jpg",
+    alt: "Comparación de problema y solución en dirección hidráulica",
+    label: "Dirección problema y solución",
+    width: 1536,
+    height: 1024,
+  },
+  {
+    src: "/montefuji-carousel-10.jpg",
+    alt: "Collage de máquinas y trabajo de taller Montefuji",
+    label: "Taller Montefuji",
+    width: 1536,
+    height: 1024,
+  },
+  {
+    src: "/montefuji-carousel-11.jpg",
+    alt: "Tornos y maquinaria del taller Montefuji",
+    label: "Taller y torno",
+    width: 1774,
+    height: 887,
   },
 ];
 
@@ -247,6 +420,8 @@ function DataRow({ k, v }: { k: string; v: string }) {
 export default function Page() {
   const [query, setQuery] = useState("");
   const [galleryIndex, setGalleryIndex] = useState(0);
+  const [galleryHoverPaused, setGalleryHoverPaused] = useState(false);
+  const [galleryManualPaused, setGalleryManualPaused] = useState(false);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -261,10 +436,24 @@ export default function Page() {
   }, [query]);
 
   const activeSlide = GALLERY_SLIDES[galleryIndex];
+
+  useEffect(() => {
+    if (galleryHoverPaused || galleryManualPaused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const timer = window.setInterval(() => {
+      setGalleryIndex((current) => (current + 1) % GALLERY_SLIDES.length);
+    }, 6000);
+
+    return () => window.clearInterval(timer);
+  }, [galleryHoverPaused, galleryManualPaused]);
+
   const showPreviousSlide = () => {
+    setGalleryManualPaused(true);
     setGalleryIndex((current) => (current - 1 + GALLERY_SLIDES.length) % GALLERY_SLIDES.length);
   };
   const showNextSlide = () => {
+    setGalleryManualPaused(true);
     setGalleryIndex((current) => (current + 1) % GALLERY_SLIDES.length);
   };
 
@@ -281,9 +470,10 @@ export default function Page() {
     <Logo />
 
     <nav className="nav">
+  <a href="#sintomas">Síntomas</a>
   <a href="#productos">Productos</a>
-  <a href="#galeria">Galería</a>
   <a href="#estandar">Estándar</a>
+  <a href="#galeria">Galería</a>
   <a href="#servicios">Servicios</a>          
   <a href="#origen">Origen</a>
   <a href="#cotizar">Cotizar</a>
@@ -300,7 +490,7 @@ export default function Page() {
 
       <a href={WHATSAPP_URL} className="whatsapp-float" target="_blank" rel="noreferrer">
         <MessageCircle size={18} />
-        <span>Cotizar por WhatsApp</span>
+        <span>WhatsApp: cotizar ahora</span>
       </a>
 
 
@@ -398,6 +588,48 @@ export default function Page() {
           <DataRow k="TEL" v="+56 9 5099 5385" />
           <DataRow k="VENTAS" v={SALES_ADDRESS} />
           <DataRow k="TALLER" v={WORKSHOP_ADDRESS} />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      {/* Síntomas */}
+<section id="sintomas" className="section symptom-section">
+  <div className="container">
+    <div className="grid-12" style={{ alignItems: "start" }}>
+      <div className="col-5">
+        <SectionTitle
+          kicker="DIAGNÓSTICO RÁPIDO"
+          title="¿Tu vehículo presenta?"
+          desc="Estos síntomas suelen anticipar fallas de homocinética, semieje, fuelle o dirección hidráulica. Mientras antes se revise, menor es el riesgo de dañar el conjunto."
+        />
+        <a href={WHATSAPP_URL} className="btn btn-primary symptom-main-cta" target="_blank" rel="noreferrer">
+          Consultar síntoma por WhatsApp <MessageCircle size={16} />
+        </a>
+      </div>
+
+      <div className="col-7">
+        <div className="symptom-grid">
+          {SYMPTOMS.map((symptom) => (
+            <div className="symptom-item" key={symptom.title}>
+              <Wrench size={17} />
+              <div>
+                <strong>{symptom.title}</strong>
+                <span>{symptom.desc}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="symptom-cta">
+          <div>
+            <strong>Envía modelo, año, lado y una foto si la tienes.</strong>
+            <span>Con eso podemos orientar si corresponde fuelle, junta, semieje o revisión de dirección.</span>
+          </div>
+          <a href={WHATSAPP_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
+            Cotizar ahora <MessageCircle size={16} />
+          </a>
         </div>
       </div>
     </div>
@@ -519,6 +751,24 @@ export default function Page() {
       </div>
     </div>
 
+    <div className="local-seo-block">
+      <div>
+        <div className="kicker">BÚSQUEDAS FRECUENTES</div>
+        <h3>Soluciones específicas</h3>
+        <p className="p">
+          Páginas rápidas para quienes llegan buscando una aplicación o síntoma concreto en Concepción.
+        </p>
+      </div>
+
+      <div className="local-seo-links">
+        {SEO_LANDING_PAGES.map((page) => (
+          <Link key={page.slug} href={`/${page.slug}`}>
+            {page.metaTitle} <ChevronRight size={14} />
+          </Link>
+        ))}
+      </div>
+    </div>
+
     <div id="cotizar" className="catalog-support">
       <div className="panel-soft quote-panel">
         <div className="quote-head">
@@ -547,7 +797,10 @@ export default function Page() {
           <div>
             <div style={{ fontSize: 14, fontWeight: 600 }}>Garantía técnica</div>
             <p className="p" style={{ marginTop: 4 }}>
-              Validamos compatibilidad antes de vender. La garantía depende de una instalación correcta, pieza sin golpes y revisión del conjunto asociado.
+              Brindamos apoyo técnico para confirmar compatibilidad y aplicación antes de la compra. La garantía aplica a productos correctamente instalados, fabricados bajo estándares de calidad ISO/TS 16949 y con revisión del sistema asociado.
+            </p>
+            <p className="p" style={{ marginTop: 8 }}>
+              Para asegurar el mejor funcionamiento y respaldo, recomendamos realizar la instalación en nuestro taller autorizado, con cobertura de hasta 12 meses o 20.000 km, lo que ocurra primero.
             </p>
           </div>
         </div>
@@ -558,32 +811,45 @@ export default function Page() {
       </div>
     </div>
 
-    <div className="panel-soft" style={{ marginTop: 18 }}>
-      <div style={{ fontSize: 14, fontWeight: 600 }}>
-        ¿Necesitas una referencia o un servicio específico?
-      </div>
-      <p className="p" style={{ marginTop: 6 }}>
-        Cuéntanos modelo/año/motor, posición (LH/RH · inner/outer) y/o número OEM,
-o el síntoma que estás diagnosticando. Revisamos el caso y te orientamos con claridad.
-      </p>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 12 }}>
-        <a href={WHATSAPP_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
-          WhatsApp <MessageCircle size={16} />
-        </a>
-        <a href="#contacto" className="btn">
-          Formulario <ChevronRight size={16} />
-        </a>
-      </div>
-    </div>
   </div>
 </section>
+
+      {/* Estándar */}
+      <section id="estandar" className="section soft">
+        <div className="container">
+          <SectionTitle
+            kicker="CRITERIO"
+            title="Estándar Montefuji"
+            desc="Reglas internas para proteger la marca y al taller. El estándar se endurece con el tiempo; nunca se relaja."
+          />
+
+          <div className="grid-2" style={{ marginTop: 18 }}>
+            <TechBlock icon={<ShieldCheck size={18} />} title="NVH" desc="Sin ruidos anómalos, sin vibración indebida, sensación uniforme." />
+            <TechBlock icon={<Wrench size={18} />} title="Ajuste y tolerancias" desc="Juego y montaje dentro de rango. Movimiento fluido, sin forzar." />
+            <TechBlock icon={<Boxes size={18} />} title="Consistencia" desc="Muestra = repuesto. Cero cambios sin aviso y trazabilidad mínima." />
+          </div>
+
+          <div className="card" style={{ marginTop: 18 }}>
+            <div className="kicker">REGLA FUNDACIONAL</div>
+            <p className="p" style={{ marginTop: 10, color: "#111" }}>
+              El criterio Montefuji nace en el banco desarmando una homocinética y en el torno produciendo o ajustando una.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Galería */}
 <section id="galeria" className="section white">
   <div className="container">
     <h2 className="h2">Galería</h2>
 
-      <div className="gallery-stage">
+      <div
+        className="gallery-stage"
+        onMouseEnter={() => setGalleryHoverPaused(true)}
+        onMouseLeave={() => setGalleryHoverPaused(false)}
+        onFocusCapture={() => setGalleryHoverPaused(true)}
+        onBlurCapture={() => setGalleryHoverPaused(false)}
+      >
         <button
           type="button"
           className="gallery-arrow gallery-arrow-left"
@@ -614,8 +880,19 @@ o el síntoma que estás diagnosticando. Revisamos el caso y te orientamos con c
           <ChevronRight size={20} />
         </button>
 
-        <div className="gallery-count font-mono">
-          {galleryIndex + 1}/{GALLERY_SLIDES.length}
+        <div className="gallery-controls">
+          <button
+            type="button"
+            className="gallery-toggle"
+            onClick={() => setGalleryManualPaused((paused) => !paused)}
+            aria-label={galleryManualPaused ? "Reproducir galería" : "Pausar galería"}
+            title={galleryManualPaused ? "Reproducir galería" : "Pausar galería"}
+          >
+            {galleryManualPaused ? <Play size={14} /> : <Pause size={14} />}
+          </button>
+          <div className="gallery-count font-mono">
+            {galleryIndex + 1}/{GALLERY_SLIDES.length}
+          </div>
         </div>
       </div>
 
@@ -625,7 +902,10 @@ o el síntoma que estás diagnosticando. Revisamos el caso y te orientamos con c
             key={slide.src}
             type="button"
             className={`gallery-thumb ${index === galleryIndex ? "is-active" : ""}`}
-            onClick={() => setGalleryIndex(index)}
+            onClick={() => {
+              setGalleryManualPaused(true);
+              setGalleryIndex(index);
+            }}
             aria-label={slide.label}
             aria-pressed={index === galleryIndex}
           >
@@ -641,30 +921,6 @@ o el síntoma que estás diagnosticando. Revisamos el caso y te orientamos con c
       </div>
     </div>
 </section>
-
-      {/* Estándar */}
-      <section id="estandar" className="section soft">
-        <div className="container">
-          <SectionTitle
-            kicker="CRITERIO"
-            title="Estándar Montefuji"
-            desc="Reglas internas para proteger la marca y al taller. El estándar se endurece con el tiempo; nunca se relaja."
-          />
-
-          <div className="grid-2" style={{ marginTop: 18 }}>
-            <TechBlock icon={<ShieldCheck size={18} />} title="NVH" desc="Sin ruidos anómalos, sin vibración indebida, sensación uniforme." />
-            <TechBlock icon={<Wrench size={18} />} title="Ajuste y tolerancias" desc="Juego y montaje dentro de rango. Movimiento fluido, sin forzar." />
-            <TechBlock icon={<Boxes size={18} />} title="Consistencia" desc="Muestra = repuesto. Cero cambios sin aviso y trazabilidad mínima." />
-          </div>
-
-          <div className="card" style={{ marginTop: 18 }}>
-            <div className="kicker">REGLA FUNDACIONAL</div>
-            <p className="p" style={{ marginTop: 10, color: "#111" }}>
-              El criterio Montefuji nace en el banco desarmando una homocinética y en el torno produciendo o ajustando una.
-            </p>
-          </div>
-        </div>
-      </section>
 
             {/* Servicios */}
       <section id="servicios" className="section white">
@@ -819,20 +1075,46 @@ o el síntoma que estás diagnosticando. Revisamos el caso y te orientamos con c
       {/* FAQ */}
       <section id="faq" className="section soft">
         <div className="container">
-          <div className="grid-12">
-            <div className="col-5">
+          <div className="faq-layout">
+            <div className="faq-aside">
               <SectionTitle
                 kicker="PREGUNTAS"
-                title="Antes de cotizar"
-                desc="Respuestas cortas para cotizar sin perder tiempo."
+                title="Compatibilidad y diagnóstico"
+                desc="Compatibilidad, transmisión y diagnóstico real de taller."
               />
+
+              <figure className="faq-photo">
+                <Image
+                  src="/montefuji-faq-compatibilidad.jpg"
+                  alt="Conjunto de homocinéticas, fuelles, sellos y componentes de dirección"
+                  width={1672}
+                  height={941}
+                  sizes="(min-width: 900px) 360px, 100vw"
+                />
+              </figure>
+
+              <div className="faq-statement">
+                <div className="kicker">CRITERIO DE TALLER</div>
+                <p>Transmisión, dirección y compatibilidad real de taller.</p>
+              </div>
             </div>
-            <div className="col-7">
+
+            <div className="faq-content">
               <div className="faq-list">
                 {FAQ.map((item) => (
                   <div key={item.q} className="faq-item">
                     <h3>{item.q}</h3>
-                    <p>{item.a}</p>
+                    {item.paragraphs.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                    {"list" in item && item.list ? (
+                      <ul>
+                        {item.list.map((point) => (
+                          <li key={point}>{point}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                    {"afterList" in item && item.afterList ? <p>{item.afterList}</p> : null}
                   </div>
                 ))}
               </div>
@@ -850,7 +1132,7 @@ o el síntoma que estás diagnosticando. Revisamos el caso y te orientamos con c
         <SectionTitle
           kicker="CONTACTO"
           title="Contacto"
-          desc="Cuéntanos tu necesidad (modelo/año/OEM) y zona. Te orientamos con criterio técnico."
+          desc="Cuéntanos tu necesidad. Te orientamos con criterio técnico."
         />
 
         <div className="stack" style={{ marginTop: 16 }}>

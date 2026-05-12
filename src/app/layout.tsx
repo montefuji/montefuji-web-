@@ -51,6 +51,12 @@ export const metadata: Metadata = {
     "Mitsubishi L200 semieje",
     "Ford Ranger homocinética",
     "Hyundai Tucson homocinética",
+    "homocineticas Hilux Concepcion",
+    "direccion hidraulica Ranger",
+    "fuelle homocinetica Concepcion",
+    "semieje Subaru Forester",
+    "vibracion al acelerar semieje",
+    "ruido al doblar homocinetica",
   ],
   category: "Autopartes y servicio técnico automotriz",
   alternates: {
@@ -176,6 +182,9 @@ const businessJsonLd = {
     "Dirección hidráulica",
     "Cremalleras hidráulicas",
     "Tren delantero",
+    "Ruido al doblar",
+    "Vibración al acelerar",
+    "Fuga de dirección hidráulica",
   ],
   makesOffer: [
     { "@type": "Offer", itemOffered: { "@type": "Product", name: "Juntas homocinéticas" } },
