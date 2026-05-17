@@ -791,16 +791,22 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="panel-soft warranty-panel">
+      <div className="panel-soft warranty-panel technical-copy">
         <div className="quote-head">
           <ShieldCheck size={18} />
           <div>
-            <div style={{ fontSize: 14, fontWeight: 600 }}>Garantía técnica</div>
-            <p className="p" style={{ marginTop: 4 }}>
-              Brindamos apoyo técnico para confirmar compatibilidad y aplicación antes de la compra. La garantía aplica a productos correctamente instalados, fabricados bajo estándares de calidad ISO/TS 16949 y con revisión del sistema asociado.
+            <div className="warranty-title">Garantía legal y respaldo técnico</div>
+            <p className="p warranty-text" style={{ marginTop: 4 }}>
+              Todos nuestros productos cuentan con garantía legal conforme a la Ley N.º 19.496 de Protección de los Derechos del Consumidor, aplicable a fallas atribuibles a defectos de fabricación.
             </p>
-            <p className="p" style={{ marginTop: 8 }}>
-              Para asegurar el mejor funcionamiento y respaldo, recomendamos realizar la instalación en nuestro taller autorizado, con cobertura de hasta 12 meses o 20.000 km, lo que ocurra primero.
+            <p className="p warranty-text" style={{ marginTop: 8 }}>
+              La garantía no cubre daños derivados de instalación incorrecta, adaptación o modificación de componentes, contaminación, lubricación inadecuada, impactos, ni fallas originadas por desgaste o mal estado del sistema asociado, incluyendo componentes del tren delantero, transmisión y soportes de motor.
+            </p>
+            <p className="p warranty-text" style={{ marginTop: 8 }}>
+              Seleccionamos proveedores con procesos de fabricación orientados a estándares de calidad de la industria automotriz.
+            </p>
+            <p className="p warranty-text" style={{ marginTop: 8 }}>
+              Adicionalmente, ofrecemos acompañamiento y respaldo técnico de hasta 12 meses o 15.000 km, lo que ocurra primero, para homocinéticas instaladas en nuestro taller autorizado, previa comprobación gratuita del estado general del sistema asociado.
             </p>
           </div>
         </div>
