@@ -364,7 +364,7 @@ const APPLICATIONS = [
   "Nissan X-Trail",
   "Hyundai Tucson",
   "Hyundai Santa Fe",
-  "Subaru Forester",
+  "Subaru",
   "Honda CR-V",
 ];
 
@@ -574,7 +574,7 @@ export default function Page() {
           <TechBlock
             icon={<Boxes size={18} />}
             title="Referencias núcleo"
-            desc="Forester, Hilux, L200, Ranger, X-Trail, Tucson, Santa Fe, CR-V y otros núcleos."
+            desc="Subaru, Hilux, L200, Ranger, X-Trail, Tucson, Santa Fe, CR-V y otros núcleos."
           />
           <TechBlock
   icon={<ShieldCheck size={18} />}

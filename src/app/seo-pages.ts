@@ -98,7 +98,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "Lado LH/RH e interior/exterior",
       "OEM, código o foto de la pieza",
     ],
-    related: ["fuelle-homocinetica-concepcion", "semiejes-subaru-forester"],
+    related: ["fuelle-homocinetica-concepcion", "semiejes-subaru"],
     keywords: [
       "homocineticas Hilux Concepcion",
       "junta homocinetica Toyota Hilux",
@@ -251,7 +251,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
     ],
     whatsappText:
       "Hola Montefuji, necesito revisar sistema de direccion.%0A%0AVehiculo:%0AAno:%0ASintoma:%0AFotos o video:%0ACiudad:",
-    heroImage: "/montefuji-gallery-prueba-hidraulica.jpg",
+    heroImage: "/montefuji-carousel-09.jpg",
     heroImageAlt: "Reparacion de direccion hidraulica con prueba de sellado",
     heroImageWidth: 2048,
     heroImageHeight: 1366,
@@ -291,7 +291,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "Medidas o foto del fuelle",
       "Si ya tiene ruido o solo perdió grasa",
     ],
-    related: ["homocineticas-hilux-concepcion", "semiejes-subaru-forester"],
+    related: ["homocineticas-hilux-concepcion", "semiejes-subaru"],
     keywords: [
       "fuelle homocinetica Concepcion",
       "cambio fuelle homocinetica",
@@ -306,15 +306,15 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
     heroImageHeight: 941,
   },
   {
-    slug: "semiejes-subaru-forester",
-    title: "Semiejes Subaru Forester",
-    metaTitle: "Semiejes Subaru Forester",
+    slug: "semiejes-subaru",
+    title: "Semiejes Subaru",
+    metaTitle: "Semiejes Subaru",
     metaDescription:
-      "Orientación y selección de semiejes para Subaru Forester. Revisión de vibración, juego, lado, largo y compatibilidad antes de vender.",
-    eyebrow: "SUBARU FORESTER",
+      "Semiejes Subaru AWD con validacion de largo efectivo, estrias, balance dinamico, NVH y compatibilidad precisa para evitar vibraciones.",
+    eyebrow: "SEMIEJES SUBARU",
     intro:
-      "En Forester es clave validar lado, largo efectivo, estrías y comportamiento en carga para evitar vibraciones o montajes forzados.",
-    vehicle: "Subaru Forester AWD, uso particular, taller y mantenimiento preventivo.",
+      "En plataformas Subaru AWD es fundamental validar largo efectivo, estrias, balance dinamico y comportamiento bajo carga para evitar vibraciones, tensiones en transmision y montajes forzados.",
+    vehicle: "Compatibilidad precisa para sistemas AWD sensibles a NVH.",
     symptoms: [
       "Vibración al acelerar",
       "Golpe al pasar de carga a retención",
@@ -323,9 +323,9 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "Juego axial o radial en semieje",
     ],
     checks: [
-      "Confirmación de lado y posición",
-      "Revisión de medidas, estrías y retención",
-      "Validación de referencia antes de recomendar",
+      "Confirmacion de largo efectivo, lado y posicion",
+      "Revision de estrias, retencion y geometria del conjunto",
+      "Evaluacion de vibracion, NVH y comportamiento bajo carga",
     ],
     quoteData: [
       "Año, motor y transmisión",
@@ -335,17 +335,22 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
     ],
     related: ["fuelle-homocinetica-concepcion", "homocineticas-hilux-concepcion"],
     keywords: [
-      "semieje Subaru Forester",
-      "homocinetica Subaru Forester",
-      "vibracion Forester semieje",
-      "repuesto Forester Concepcion",
+      "semieje Subaru",
+      "homocinetica Subaru",
+      "vibracion Subaru semieje",
+      "repuesto Subaru Concepcion",
     ],
     whatsappText:
-      "Hola Montefuji, necesito cotizar semieje para Subaru Forester.%0A%0AAño:%0AMotor/transmisión:%0ALado:%0ASíntoma:%0AReferencia o foto:",
-    heroImage: "/montefuji-gallery-semiejes-antes-despues.jpg",
-    heroImageAlt: "Semiejes en revision tecnica",
-    heroImageWidth: 1600,
-    heroImageHeight: 900,
+      "Hola Montefuji, necesito cotizar semieje para Subaru.%0A%0AAño:%0AMotor/transmisión:%0ALado:%0ASíntoma:%0AReferencia o foto:",
+    heroImage: "/semieje-subaru.png",
+    heroImageAlt: "Semieje Subaru",
+    heroImageWidth: 2176,
+    heroImageHeight: 2176,
+    technicalTitle: "Aplicaciones Subaru AWD",
+    technicalParagraphs: [
+      "Trabajamos aplicaciones compatibles con distintos modelos Subaru, priorizando funcionamiento suave, geometria correcta y comportamiento estable en condiciones reales de uso.",
+      "Diferencias minimas de geometria pueden generar vibraciones perceptibles en plataformas Subaru AWD.",
+    ],
   },
 ];
 

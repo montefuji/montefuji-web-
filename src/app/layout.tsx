@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     "homocineticas Hilux Concepcion",
     "direccion hidraulica Ranger",
     "fuelle homocinetica Concepcion",
-    "semieje Subaru Forester",
+    "semieje Subaru",
     "vibracion al acelerar semieje",
     "ruido al doblar homocinetica",
     "direccion hidraulica Concepcion",
@@ -132,6 +132,16 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#ffffff",
   colorScheme: "light",
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": absoluteUrl("/#website"),
+  name: siteName,
+  url: siteUrl,
+  inLanguage: "es-CL",
+  publisher: { "@id": absoluteUrl("/#montefuji") },
 };
 
 const businessJsonLd = {
@@ -212,6 +222,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         {children}
       </body>

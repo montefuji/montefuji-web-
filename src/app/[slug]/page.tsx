@@ -10,11 +10,91 @@ type PageParams = {
 };
 
 const WHATSAPP_PHONE = "56950995385";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.montefuji.org";
 
 export const dynamicParams = false;
 
 function whatsappUrl(message: string) {
   return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message.replaceAll("%0A", "\n"))}`;
+}
+
+function absoluteUrl(path: string) {
+  return new URL(path, SITE_URL).toString();
+}
+
+function landingJsonLd(page: NonNullable<ReturnType<typeof getSeoLandingPage>>) {
+  const pageUrl = absoluteUrl(`/${page.slug}`);
+  const isSteeringPage = page.slug.includes("direccion") || page.slug.includes("sistemas-de-direccion");
+  const mainEntity = isSteeringPage
+    ? {
+        "@type": "Service",
+        "@id": `${pageUrl}#service`,
+        name: page.title,
+        description: page.metaDescription,
+        serviceType: "Direccion hidraulica automotriz",
+        areaServed: [
+          { "@type": "City", name: "Concepcion" },
+          { "@type": "AdministrativeArea", name: "Biobio" },
+        ],
+        provider: { "@id": absoluteUrl("/#montefuji") },
+      }
+    : {
+        "@type": "Product",
+        "@id": `${pageUrl}#product`,
+        name: page.title,
+        description: page.metaDescription,
+        image: absoluteUrl(page.heroImage),
+        brand: { "@type": "Brand", name: "Montefuji" },
+        category: "Autopartes",
+        offers: {
+          "@type": "Offer",
+          availability: "https://schema.org/InStock",
+          priceCurrency: "CLP",
+          seller: { "@id": absoluteUrl("/#montefuji") },
+        },
+      };
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: `${page.metaTitle} | Montefuji`,
+        description: page.metaDescription,
+        inLanguage: "es-CL",
+        isPartOf: { "@id": absoluteUrl("/#website") },
+        about: { "@id": mainEntity["@id"] },
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: absoluteUrl(page.heroImage),
+          width: page.heroImageWidth,
+          height: page.heroImageHeight,
+          caption: page.heroImageAlt,
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Inicio",
+            item: SITE_URL,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: page.title,
+            item: pageUrl,
+          },
+        ],
+      },
+      mainEntity,
+    ],
+  };
 }
 
 export function generateStaticParams() {
@@ -73,6 +153,10 @@ export default async function SeoLandingPage({ params }: PageParams) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(landingJsonLd(page)) }}
+      />
       <header className="header">
         <div className="header-row" style={{ minHeight: 96, alignItems: "center" }}>
           <Link href="/" aria-label="Ir al inicio">
