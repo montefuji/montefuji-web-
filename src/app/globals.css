@@ -1118,6 +1118,17 @@ img { max-width: 100%; }
   object-fit: contain;
 }
 
+.landing-photo--plain {
+  min-height: 0;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.landing-photo--plain img {
+  max-height: none;
+}
+
 .landing-columns {
   display: grid;
   gap: 16px;

@@ -45,10 +45,10 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
       description: page.metaDescription,
       images: [
         {
-          url: "/montefuji-product-cv-kit.webp",
-          width: 1086,
-          height: 1448,
-          alt: "Repuestos Montefuji para homocinéticas, fuelles y semiejes",
+          url: page.heroImage,
+          width: page.heroImageWidth,
+          height: page.heroImageHeight,
+          alt: page.heroImageAlt,
         },
       ],
     },
@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
       card: "summary_large_image",
       title: `${page.metaTitle} | Montefuji`,
       description: page.metaDescription,
-      images: ["/montefuji-product-cv-kit.webp"],
+      images: [page.heroImage],
     },
   };
 }
@@ -127,12 +127,18 @@ export default async function SeoLandingPage({ params }: PageParams) {
             </div>
 
             <div className="col-5">
-              <figure className="landing-photo">
+              <figure
+                className={
+                  page.heroImageStyle === "plain"
+                    ? "landing-photo landing-photo--plain"
+                    : "landing-photo"
+                }
+              >
                 <Image
-                  src="/montefuji-product-cv-kit.webp"
-                  alt="Kit de junta homocinética Montefuji"
-                  width={1086}
-                  height={1448}
+                  src={page.heroImage}
+                  alt={page.heroImageAlt}
+                  width={page.heroImageWidth}
+                  height={page.heroImageHeight}
                   priority
                   sizes="(min-width: 900px) 420px, 100vw"
                 />
@@ -140,6 +146,28 @@ export default async function SeoLandingPage({ params }: PageParams) {
             </div>
           </div>
         </section>
+
+        {page.technicalParagraphs && page.technicalParagraphs.length > 0 && (
+          <section className="section soft">
+            <div className="container">
+              <div className="panel-soft">
+                <div className="quote-head">
+                  <ClipboardCheck size={18} />
+                  <div>
+                    <div style={{ fontSize: 14, fontWeight: 600 }}>
+                      {page.technicalTitle ?? "Informacion tecnica"}
+                    </div>
+                    {page.technicalParagraphs.map((paragraph) => (
+                      <p className="p" style={{ marginTop: 8 }} key={paragraph}>
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="section white">
           <div className="container">
