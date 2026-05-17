@@ -16,6 +16,44 @@ export type SeoLandingPage = {
 
 export const SEO_LANDING_PAGES: SeoLandingPage[] = [
   {
+    slug: "homocineticas-concepcion",
+    title: "Homocineticas en Concepcion",
+    metaTitle: "Homocineticas en Concepcion",
+    metaDescription:
+      "Venta y orientacion tecnica en homocineticas en Concepcion. Revision de ruido al doblar, vibracion al acelerar, fuelles y semiejes para pick-ups y SUVs.",
+    eyebrow: "HOMOCINETICAS",
+    intro:
+      "Nos especializamos en homocineticas en Concepcion: validamos aplicacion real antes de recomendar repuesto o servicio.",
+    vehicle: "Concepcion y Gran Concepcion: atencion para particulares, talleres y flotas.",
+    symptoms: [
+      "Ruido al doblar o maniobrar",
+      "Vibracion al acelerar",
+      "Golpe al cambiar de carga",
+      "Grasa en rueda por fuelle roto",
+      "Juego en semieje o junta",
+    ],
+    checks: [
+      "Cruce por ano, motor, traccion y posicion",
+      "Validacion de estrias, ABS y largo",
+      "Revision de fuelle, grasa y seguros",
+    ],
+    quoteData: [
+      "Marca, modelo, ano y motor",
+      "Lado y posicion (LH/RH - interior/exterior)",
+      "Sintoma principal",
+      "OEM, codigo o foto de referencia",
+    ],
+    related: ["direccion-hidraulica-concepcion", "fuelle-homocinetica-concepcion"],
+    keywords: [
+      "homocineticas Concepcion",
+      "homocinetica Concepcion",
+      "junta homocinetica Concepcion",
+      "semieje Concepcion",
+    ],
+    whatsappText:
+      "Hola Montefuji, necesito cotizar homocinetica en Concepcion.%0A%0AVehiculo:%0AAno:%0AMotor:%0ALado/posicion:%0ASintoma:%0AOEM o foto:",
+  },
+  {
     slug: "homocineticas-hilux-concepcion",
     title: "Homocinéticas para Toyota Hilux en Concepción",
     metaTitle: "Homocinéticas Hilux en Concepción",
