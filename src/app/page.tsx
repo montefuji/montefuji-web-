@@ -756,7 +756,7 @@ export default function Page() {
         <div className="kicker">BÚSQUEDAS FRECUENTES</div>
         <h3>Soluciones específicas</h3>
         <p className="p">
-          Páginas rápidas para quienes llegan buscando una aplicación o síntoma concreto en Concepción.
+          Páginas rápidas para quienes llegan buscando homocinéticas, dirección hidráulica o sistemas de dirección con síntomas concretos en Concepción.
         </p>
       </div>
 

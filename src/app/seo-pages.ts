@@ -54,6 +54,44 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "Hola Montefuji, necesito cotizar homocinética para Toyota Hilux.%0A%0AAño:%0AMotor:%0A4x2 o 4x4:%0ALado/posición:%0AOEM o foto:%0ASíntoma:",
   },
   {
+    slug: "direccion-hidraulica-concepcion",
+    title: "Direccion hidraulica en Concepcion",
+    metaTitle: "Direccion hidraulica en Concepcion",
+    metaDescription:
+      "Servicio tecnico de direccion hidraulica en Concepcion: diagnostico, fugas, cremallera, bomba, sellos y componentes asociados para pick-ups y SUVs.",
+    eyebrow: "DIRECCION HIDRAULICA",
+    intro:
+      "Revisamos el sistema de direccion hidraulica completo antes de recomendar reparacion o recambio.",
+    vehicle: "Pick-ups, SUVs y autos con direccion hidraulica en Concepcion y Gran Concepcion.",
+    symptoms: [
+      "Volante duro en frio o caliente",
+      "Fuga de liquido de direccion",
+      "Zumbido o ruido al girar",
+      "Retorno irregular del volante",
+      "Juego en direccion o golpe frontal",
+    ],
+    checks: [
+      "Revision de cremallera, bomba y sellos",
+      "Control de juego en terminales, rotulas y bieletas",
+      "Prueba hidraulica y validacion del sistema asociado",
+    ],
+    quoteData: [
+      "Marca, modelo, ano y motor",
+      "Sintoma principal y cuando aparece",
+      "Foto de fuga, cremallera o bomba",
+      "Uso del vehiculo y urgencia",
+    ],
+    related: ["direccion-hidraulica-ranger", "homocineticas-hilux-concepcion"],
+    keywords: [
+      "direccion hidraulica Concepcion",
+      "reparacion direccion hidraulica Concepcion",
+      "cremallera hidraulica Concepcion",
+      "bomba direccion hidraulica Concepcion",
+    ],
+    whatsappText:
+      "Hola Montefuji, necesito revisar direccion hidraulica en Concepcion.%0A%0AVehiculo:%0AAno:%0AMotor:%0ASintoma:%0AHay fuga:%0AFotos:%0ACiudad:",
+  },
+  {
     slug: "direccion-hidraulica-ranger",
     title: "Dirección hidráulica para Ford Ranger",
     metaTitle: "Dirección hidráulica Ford Ranger",
@@ -90,6 +128,44 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
     ],
     whatsappText:
       "Hola Montefuji, necesito revisar dirección hidráulica de Ford Ranger.%0A%0AAño:%0AMotor:%0ASíntoma:%0AHay fuga:%0AFotos:%0ACiudad:",
+  },
+  {
+    slug: "sistemas-de-direccion-concepcion",
+    title: "Sistemas de direccion en Concepcion",
+    metaTitle: "Sistemas de direccion en Concepcion",
+    metaDescription:
+      "Revision y soporte tecnico para sistemas de direccion en Concepcion: direccion hidraulica, terminales, rotulas, cremallera y tren delantero.",
+    eyebrow: "SISTEMAS DE DIRECCION",
+    intro:
+      "Nos enfocamos en direccion hidraulica y componentes del sistema de direccion para diagnostico real y reparacion precisa.",
+    vehicle: "Concepcion: atencion para particulares, talleres y flotas.",
+    symptoms: [
+      "Desgaste irregular de neumaticos",
+      "Volante con juego o vibracion",
+      "Tironeo al frenar o al pasar baches",
+      "Crujidos en maniobras cerradas",
+      "Desviacion de trayectoria",
+    ],
+    checks: [
+      "Revision de terminales, rotulas y bujes",
+      "Control de cremallera, sellos y fugas",
+      "Evaluacion de tren delantero en contexto",
+    ],
+    quoteData: [
+      "Marca, modelo y ano",
+      "Sintoma y en que condiciones aparece",
+      "Cambios o reparaciones recientes",
+      "Fotos o video del comportamiento",
+    ],
+    related: ["direccion-hidraulica-concepcion", "direccion-hidraulica-ranger"],
+    keywords: [
+      "sistemas de direccion Concepcion",
+      "sistema de direccion hidraulica",
+      "diagnostico direccion automotriz",
+      "tren delantero direccion Concepcion",
+    ],
+    whatsappText:
+      "Hola Montefuji, necesito revisar sistema de direccion.%0A%0AVehiculo:%0AAno:%0ASintoma:%0AFotos o video:%0ACiudad:",
   },
   {
     slug: "fuelle-homocinetica-concepcion",
