@@ -25,8 +25,8 @@ import {
 import { SEO_LANDING_PAGES } from "./seo-pages";
 
 const WHATSAPP_MESSAGE =
-  "Hola Montefuji, necesito cotizar.%0A%0AVehiculo:%0AAno:%0AMotor:%0APosicion (LH/RH - interior/exterior):%0ASintoma:%0AOEM o referencia:%0ACiudad:";
-const WHATSAPP_URL = `https://wa.me/56950995385?text=${WHATSAPP_MESSAGE}`;
+  "Hola Montefuji, necesito cotizar.%0A%0AVehiculo:%0AVIN:%0AAno:%0AMotor:%0APosicion (LH/RH - interior/exterior):%0ASintoma:%0AOEM o referencia:%0ACiudad:";
+const WHATSAPP_URL = `https://wa.me/56995709102?text=${WHATSAPP_MESSAGE}`;
 const SALES_ADDRESS = "Salas 566";
 const WORKSHOP_ADDRESS = "Colo Colo 922";
 const BUSINESS_HOURS = "Lunes a viernes: 9:30 a 18:30 · Sábado: coordinar por WhatsApp";
@@ -349,7 +349,7 @@ const GALLERY_SLIDES = [
 ];
 
 const QUOTE_FIELDS = [
-  ["Vehiculo", "Marca, modelo, año y motor"],
+  ["Vehiculo", "Marca, modelo, año, motor y VIN"],
   ["Posicion", "LH/RH e interior/exterior"],
   ["Referencia", "OEM, codigo alternativo o foto de la pieza"],
   ["Sintoma", "Ruido, vibracion, fuelle roto, fuga o juego"],
@@ -585,7 +585,7 @@ export default function Page() {
 
         <div className="panel-soft" style={{ marginTop: 16 }}>
           <DataRow k="CONTACTO" v="info@montefuji.org" />
-          <DataRow k="TEL" v="+56 9 5099 5385" />
+          <DataRow k="TEL" v="+56 9 9570 9102" />
           <DataRow k="VENTAS" v={SALES_ADDRESS} />
           <DataRow k="TALLER" v={WORKSHOP_ADDRESS} />
         </div>
@@ -1146,7 +1146,7 @@ export default function Page() {
             <Mail size={16} style={{ color: "#6b7280" }} /> info@montefuji.org
           </div>
           <div className="iconline">
-            <Phone size={16} style={{ color: "#6b7280" }} /> +56 9 5099 5385
+            <Phone size={16} style={{ color: "#6b7280" }} /> +56 9 9570 9102
           </div>
           <a className="iconline" href={WHATSAPP_URL} target="_blank" rel="noreferrer">
             <MessageCircle size={16} style={{ color: "#6b7280" }} /> Cotizar por WhatsApp
@@ -1258,7 +1258,7 @@ export default function Page() {
                 name="mensaje"
                 className="textarea"
                 rows={6}
-                placeholder="Ej.: Hilux 2016 4x4 · junta exterior RH · OEM 43405-0K020"
+                placeholder="Ej.: Hilux 2016 4x4 · VIN · junta exterior RH · OEM 43405-0K020"
                 required
               />
             </label>

@@ -9,7 +9,7 @@ type PageParams = {
   params: Promise<{ slug: string }>;
 };
 
-const WHATSAPP_PHONE = "56950995385";
+const WHATSAPP_PHONE = "56995709102";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.montefuji.org";
 
 export const dynamicParams = false;

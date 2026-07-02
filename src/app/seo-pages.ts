@@ -45,7 +45,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "Revision de fuelle, grasa y seguros",
     ],
     quoteData: [
-      "Marca, modelo, ano y motor",
+      "Marca, modelo, ano, motor y VIN",
       "Lado y posicion (LH/RH - interior/exterior)",
       "Sintoma principal",
       "OEM, codigo o foto de referencia",
@@ -58,7 +58,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "semieje Concepcion",
     ],
     whatsappText:
-      "Hola Montefuji, necesito cotizar homocinetica en Concepcion.%0A%0AVehiculo:%0AAno:%0AMotor:%0ALado/posicion:%0ASintoma:%0AOEM o foto:",
+      "Hola Montefuji, necesito cotizar homocinetica en Concepcion.%0A%0AVehiculo:%0AVIN:%0AAno:%0AMotor:%0ALado/posicion:%0ASintoma:%0AOEM o foto:",
     heroImage: "/montefuji-product-cv-kit.webp",
     heroImageAlt: "Kit de junta homocinetica Montefuji",
     heroImageWidth: 1086,
@@ -93,7 +93,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "Revisión de fuelle, grasa, tuerca y seguros",
     ],
     quoteData: [
-      "Modelo, año y motor",
+      "Modelo, año, motor y VIN",
       "4x2 o 4x4",
       "Lado LH/RH e interior/exterior",
       "OEM, código o foto de la pieza",
@@ -106,7 +106,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "semieje Hilux Concepción",
     ],
     whatsappText:
-      "Hola Montefuji, necesito cotizar homocinética para Toyota Hilux.%0A%0AAño:%0AMotor:%0A4x2 o 4x4:%0ALado/posición:%0AOEM o foto:%0ASíntoma:",
+      "Hola Montefuji, necesito cotizar homocinética para Toyota Hilux.%0A%0AVIN:%0AAño:%0AMotor:%0A4x2 o 4x4:%0ALado/posición:%0AOEM o foto:%0ASíntoma:",
     heroImage: "/montefuji-product-cv-kit.webp",
     heroImageAlt: "Kit de junta homocinetica para Toyota Hilux",
     heroImageWidth: 1086,
@@ -141,7 +141,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "Prueba hidraulica y validacion del sistema asociado",
     ],
     quoteData: [
-      "Marca, modelo, ano y motor",
+      "Marca, modelo, ano, motor y VIN",
       "Sintoma principal y cuando aparece",
       "Foto de fuga, cremallera o bomba",
       "Uso del vehiculo y urgencia",
@@ -154,7 +154,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "bomba direccion hidraulica Concepcion",
     ],
     whatsappText:
-      "Hola Montefuji, necesito revisar direccion hidraulica en Concepcion.%0A%0AVehiculo:%0AAno:%0AMotor:%0ASintoma:%0AHay fuga:%0AFotos:%0ACiudad:",
+      "Hola Montefuji, necesito revisar direccion hidraulica en Concepcion.%0A%0AVehiculo:%0AVIN:%0AAno:%0AMotor:%0ASintoma:%0AHay fuga:%0AFotos:%0ACiudad:",
     heroImage: "/montefuji-steering-rack.webp",
     heroImageAlt: "Cremallera de direccion hidraulica Montefuji",
     heroImageWidth: 1600,
@@ -189,7 +189,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "Prueba hidráulica bajo carga cuando corresponde",
     ],
     quoteData: [
-      "Año y motor",
+      "VIN, año y motor",
       "Síntoma principal",
       "Fotos de fuga o cremallera",
       "Uso del vehículo y urgencia",
@@ -202,7 +202,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "volante duro Ranger",
     ],
     whatsappText:
-      "Hola Montefuji, necesito revisar dirección hidráulica de Ford Ranger.%0A%0AAño:%0AMotor:%0ASíntoma:%0AHay fuga:%0AFotos:%0ACiudad:",
+      "Hola Montefuji, necesito revisar dirección hidráulica de Ford Ranger.%0A%0AVIN:%0AAño:%0AMotor:%0ASíntoma:%0AHay fuga:%0AFotos:%0ACiudad:",
     heroImage: "/montefuji-steering-rack.webp",
     heroImageAlt: "Sistema de direccion hidraulica para Ford Ranger",
     heroImageWidth: 1600,
@@ -237,7 +237,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "Evaluacion de tren delantero en contexto",
     ],
     quoteData: [
-      "Marca, modelo y ano",
+      "Marca, modelo, ano y VIN",
       "Sintoma y en que condiciones aparece",
       "Cambios o reparaciones recientes",
       "Fotos o video del comportamiento",
@@ -250,7 +250,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "tren delantero direccion Concepcion",
     ],
     whatsappText:
-      "Hola Montefuji, necesito revisar sistema de direccion.%0A%0AVehiculo:%0AAno:%0ASintoma:%0AFotos o video:%0ACiudad:",
+      "Hola Montefuji, necesito revisar sistema de direccion.%0A%0AVehiculo:%0AVIN:%0AAno:%0ASintoma:%0AFotos o video:%0ACiudad:",
     heroImage: "/montefuji-carousel-09.jpg",
     heroImageAlt: "Reparacion de direccion hidraulica con prueba de sellado",
     heroImageWidth: 2048,
@@ -286,7 +286,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "Estado real de la junta antes de cerrar",
     ],
     quoteData: [
-      "Modelo, año y motor",
+      "Modelo, año, motor y VIN",
       "Interior o exterior",
       "Medidas o foto del fuelle",
       "Si ya tiene ruido o solo perdió grasa",
@@ -299,7 +299,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "grasa rueda homocinetica",
     ],
     whatsappText:
-      "Hola Montefuji, necesito cotizar o cambiar fuelle de homocinética.%0A%0AVehículo:%0AAño:%0AInterior/exterior:%0ALado:%0ATiene ruido:%0AFoto:",
+      "Hola Montefuji, necesito cotizar o cambiar fuelle de homocinética.%0A%0AVehículo:%0AVIN:%0AAño:%0AInterior/exterior:%0ALado:%0ATiene ruido:%0AFoto:",
     heroImage: "/montefuji-product-boots.webp",
     heroImageAlt: "Fuelles homocineticos Montefuji",
     heroImageWidth: 1672,
@@ -328,7 +328,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "Evaluacion de vibracion, NVH y comportamiento bajo carga",
     ],
     quoteData: [
-      "Año, motor y transmisión",
+      "VIN, año, motor y transmisión",
       "Lado del vehículo",
       "Síntoma y velocidad donde aparece",
       "Foto del semieje o referencia",
@@ -341,7 +341,7 @@ export const SEO_LANDING_PAGES: SeoLandingPage[] = [
       "repuesto Subaru Concepcion",
     ],
     whatsappText:
-      "Hola Montefuji, necesito cotizar semieje para Subaru.%0A%0AAño:%0AMotor/transmisión:%0ALado:%0ASíntoma:%0AReferencia o foto:",
+      "Hola Montefuji, necesito cotizar semieje para Subaru.%0A%0AVIN:%0AAño:%0AMotor/transmisión:%0ALado:%0ASíntoma:%0AReferencia o foto:",
     heroImage: "/semieje-subaru.png",
     heroImageAlt: "Semieje Subaru",
     heroImageWidth: 2176,
