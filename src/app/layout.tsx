@@ -157,7 +157,7 @@ const businessJsonLd = {
     absoluteUrl("/montefuji-steering-rack.webp"),
   ],
   description: siteDescription,
-  telephone: "+56995709102",
+  telephone: "+56967627139",
   email: "info@montefuji.org",
   priceRange: "$$",
   address: {
