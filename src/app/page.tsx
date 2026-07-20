@@ -27,6 +27,7 @@ import { SEO_LANDING_PAGES } from "./seo-pages";
 const WHATSAPP_MESSAGE =
   "Hola Montefuji, necesito cotizar.%0A%0AVehiculo:%0AVIN:%0AAno:%0AMotor:%0APosicion (LH/RH - interior/exterior):%0ASintoma:%0AOEM o referencia:%0ACiudad:";
 const WHATSAPP_URL = `https://wa.me/56995709102?text=${WHATSAPP_MESSAGE}`;
+const TALLER_URL = "https://taller.homocineticas-montefuji.cl";
 const SALES_ADDRESS = "Salas 566 (próximamente)";
 const WORKSHOP_ADDRESS = "Colo Colo 922";
 const BUSINESS_HOURS = "Lunes a viernes: 9:30 a 18:30 · Sábado: coordinar por WhatsApp";
@@ -479,6 +480,7 @@ export default function Page() {
   <a href="#cotizar">Cotizar</a>
   <a href="#faq">FAQ</a>
   <a href="#contacto">Contacto</a>
+  <a href={TALLER_URL} target="_blank" rel="noreferrer">Taller</a>
 </nav>
 
 
