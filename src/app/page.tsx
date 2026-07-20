@@ -480,7 +480,6 @@ export default function Page() {
   <a href="#cotizar">Cotizar</a>
   <a href="#faq">FAQ</a>
   <a href="#contacto">Contacto</a>
-  <a href={TALLER_URL} target="_blank" rel="noreferrer">Taller</a>
 </nav>
 
 
@@ -1290,6 +1289,14 @@ export default function Page() {
     <footer className="footer">
       <div>© {new Date().getFullYear()} Montefuji. Todos los derechos reservados.</div>
       <div>Hecho con criterio. Sin ruido.</div>
+      <a
+        href={TALLER_URL}
+        target="_blank"
+        rel="noreferrer"
+        style={{ color: "inherit", textDecoration: "none" }}
+      >
+        Acceso interno · personal autorizado
+      </a>
     </footer>
   </div>
 </section>
