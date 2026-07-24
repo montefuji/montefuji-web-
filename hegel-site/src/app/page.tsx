@@ -27,6 +27,8 @@ const INFOGRAPHICS = [
   },
 ];
 
+const SHAREPOINT_CLASS_URL = "https://udeconce.sharepoint.com/:u:/r/sites/TesisFilosofadelDerecho/SitePages/Clase-parte1.aspx?csf=1&web=2&share=IQDsel2uiuFBS7oPBl4YdnzjAXH5xa-u7ejZtZ8zxiSYABg&e=IeyhR8";
+
 const KEY_IDEAS = [
   ["01", "El Estado es realidad efectiva", "La idea ética se vuelve concreta en instituciones, costumbres, leyes y prácticas de la vida común."],
   ["02", "Lo universal está en lo particular", "El bien común no elimina al individuo: se realiza en individuos que lo reconocen y actúan libremente."],
@@ -64,12 +66,17 @@ function VideoSlot() {
           <div className="study-file-row"><span>{fileName}</span><button type="button" onClick={() => { setVideoUrl(null); setFileName(""); }}>Cambiar video</button></div>
         </div>
       ) : (
-        <label className="study-upload-zone">
-          <PlayCircle size={42} strokeWidth={1.5} />
-          <strong>Seleccionar video</strong>
-          <span>MP4, WebM o MOV · se recomienda verlo con las infografías abiertas</span>
-          <input type="file" accept="video/*" onChange={onVideoChange} />
-        </label>
+        <>
+          <a className="study-button" href={SHAREPOINT_CLASS_URL} target="_blank" rel="noreferrer" style={{ marginTop: 22 }}>
+            <PlayCircle size={18} /> Abrir el video en SharePoint
+          </a>
+          <label className="study-upload-zone">
+            <PlayCircle size={42} strokeWidth={1.5} />
+            <strong>O seleccionar un video desde el equipo</strong>
+            <span>MP4, WebM o MOV · se reproduce solo en este navegador</span>
+            <input type="file" accept="video/*" onChange={onVideoChange} />
+          </label>
+        </>
       )}
     </div>
   );
