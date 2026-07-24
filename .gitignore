@@ -15,6 +15,7 @@
 
 # next.js
 /.next/
+/hegel-site/.next/
 /out/
 
 # production
