@@ -1,6 +1,5 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
-import { Inter, IBM_Plex_Mono } from "next/font/google";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.montefuji.org";
 const siteName = "Montefuji";
@@ -11,20 +10,6 @@ const ogImage = "/montefuji-cv-axle.webp";
 function absoluteUrl(path: string) {
   return new URL(path, siteUrl).toString();
 }
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-  variable: "--font-sans",
-});
-
-const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400"],
-  display: "swap",
-  variable: "--font-mono",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -217,7 +202,7 @@ const businessJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${inter.variable} ${mono.variable}`}>
+    <html lang="es">
       <body>
         <script
           type="application/ld+json"
