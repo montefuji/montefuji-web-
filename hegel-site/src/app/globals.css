@@ -1270,6 +1270,8 @@ img { max-width: 100%; }
 .study-upload-zone input { display:none; }
 .study-video-player { margin-top:23px; background:#14243a; padding:10px; }
 .study-video-player video { display:block; width:100%; max-height:500px; }
+.study-embed-player { padding:0; }
+.study-embed-player iframe { display:block; width:100%; min-height:360px; border:0; }
 .study-file-row { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:8px 4px 0; color:#fff; font-size:12px; }
 .study-file-row button, .study-nav button, .study-finish button { border:0; color:inherit; background:none; font-weight:700; cursor:pointer; }
 .study-section-title { display:flex; gap:14px; align-items:flex-start; }

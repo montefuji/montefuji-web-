@@ -28,6 +28,7 @@ const INFOGRAPHICS = [
 ];
 
 const SHAREPOINT_CLASS_URL = "https://udeconce.sharepoint.com/:u:/r/sites/TesisFilosofadelDerecho/SitePages/Clase-parte1.aspx?csf=1&web=2&share=IQDsel2uiuFBS7oPBl4YdnzjAXH5xa-u7ejZtZ8zxiSYABg&e=IeyhR8";
+const SECOND_VIDEO_EMBED_URL = "https://udeconce.sharepoint.com/sites/TesisFilosofadelDerecho/_layouts/15/embed.aspx?UniqueId=be5684f0-5fc4-4e17-a1b2-7bb62eeecc4d&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create";
 
 const KEY_IDEAS = [
   ["01", "El Estado es realidad efectiva", "La idea ética se vuelve concreta en instituciones, costumbres, leyes y prácticas de la vida común."],
@@ -94,19 +95,6 @@ function VideoSlot() {
 }
 
 function SecondVideoSlot() {
-  const [videoUrl, setVideoUrl] = useState<string | null>(null);
-  const [fileName, setFileName] = useState("");
-
-  useEffect(() => () => { if (videoUrl) URL.revokeObjectURL(videoUrl); }, [videoUrl]);
-
-  function onVideoChange(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    if (videoUrl) URL.revokeObjectURL(videoUrl);
-    setVideoUrl(URL.createObjectURL(file));
-    setFileName(file.name);
-  }
-
   return (
     <div className="study-video-card">
       <div className="study-video-head">
@@ -117,7 +105,7 @@ function SecondVideoSlot() {
         </div>
         <FileVideo aria-hidden="true" size={32} />
       </div>
-      {videoUrl ? <div className="study-video-player"><video controls src={videoUrl} /><div className="study-file-row"><span>{fileName}</span><button type="button" onClick={() => { setVideoUrl(null); setFileName(""); }}>Cambiar video</button></div></div> : <label className="study-upload-zone"><PlayCircle size={42} strokeWidth={1.5} /><strong>Seleccionar el nuevo video</strong><span>MP4, WebM o MOV · se reproduce solo en este navegador</span><input type="file" accept="video/*" onChange={onVideoChange} /></label>}
+      <div className="study-video-player study-embed-player"><iframe src={SECOND_VIDEO_EMBED_URL} width="640" height="360" frameBorder="0" scrolling="no" allowFullScreen title="Clase 2: segunda parte sobre el Estado" /></div>
     </div>
   );
 }
