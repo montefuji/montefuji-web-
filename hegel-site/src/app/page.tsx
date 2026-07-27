@@ -28,7 +28,7 @@ const INFOGRAPHICS = [
 ];
 
 const SHAREPOINT_CLASS_URL = "https://udeconce.sharepoint.com/:u:/r/sites/TesisFilosofadelDerecho/SitePages/Clase-parte1.aspx?csf=1&web=2&share=IQDsel2uiuFBS7oPBl4YdnzjAXH5xa-u7ejZtZ8zxiSYABg&e=IeyhR8";
-const SECOND_VIDEO_EMBED_URL = "https://udeconce.sharepoint.com/sites/TesisFilosofadelDerecho/_layouts/15/embed.aspx?UniqueId=be5684f0-5fc4-4e17-a1b2-7bb62eeecc4d&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create";
+const SECOND_VIDEO_SHARE_URL = "https://udeconce.sharepoint.com/:v:/s/TesisFilosofadelDerecho/IQDwhFa-xF8XTqGye7Yu7sxNATB-iL3aX0zHasSwMv3T9qo?e=pqAC4o&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D";
 
 const KEY_IDEAS = [
   ["01", "El Estado es realidad efectiva", "La idea ética se vuelve concreta en instituciones, costumbres, leyes y prácticas de la vida común."],
@@ -105,7 +105,7 @@ function SecondVideoSlot() {
         </div>
         <FileVideo aria-hidden="true" size={32} />
       </div>
-      <div className="study-video-player study-embed-player"><iframe src={SECOND_VIDEO_EMBED_URL} width="640" height="360" frameBorder="0" scrolling="no" allowFullScreen title="Clase 2: segunda parte sobre el Estado" /></div>
+      <div className="study-video-player study-share-video"><a className="study-button" href={SECOND_VIDEO_SHARE_URL} target="_blank" rel="noreferrer"><PlayCircle size={20} /> Abrir la segunda parte en SharePoint</a><p>El video se abrirá en una pestaña nueva. La estudiante debe tener permiso de acceso al archivo en SharePoint.</p></div>
     </div>
   );
 }
