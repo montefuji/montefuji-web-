@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowDown, BookOpen, CheckCircle2, PlayCircle, Sparkles } from "lucide-react";
+import { ArrowDown, BookOpen, CheckCircle2, Maximize2, PlayCircle, Sparkles, X } from "lucide-react";
 import { useMemo, useState } from "react";
 
 type Infographic = { src: string; title: string; caption: string; question: string };
@@ -54,9 +54,10 @@ function IdeaGrid({ ideas }: { ideas: string[][] }) {
 
 function InfographicGallery({ items, label }: { items: Infographic[]; label: string }) {
   const [active, setActive] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
   const item = items[active];
   const progress = useMemo(() => Math.round(((active + 1) / items.length) * 100), [active, items.length]);
-  return <div className="study-gallery"><div className="study-gallery-head"><div><span className="study-eyebrow">MAPA VISUAL · {label}</span><h2>Infografías para acompañar el video</h2><p className="study-muted">Míralas en orden y trata de explicar la idea central antes de avanzar.</p></div><div className="study-progress"><strong>{progress}%</strong><span>recorrido visual</span></div></div><div className="study-tabs">{items.map((entry, index) => <button type="button" className={active === index ? "is-active" : ""} onClick={() => setActive(index)} key={entry.title}><span>{index + 1}</span>{entry.title}</button>)}</div><article className="study-infographic-card"><div className="study-infographic-image"><Image src={item.src} alt={item.title} width={2048} height={1536} priority={active === 0} /></div><div className="study-infographic-copy"><span className="study-eyebrow">INFOGRAFÍA {active + 1} DE {items.length}</span><h3>{item.title}</h3><p>{item.caption}</p><div className="study-observe"><strong>Mientras observas, pregúntate:</strong><p>{item.question}</p></div><div className="study-nav"><button type="button" disabled={active === 0} onClick={() => setActive(active - 1)}>← Anterior</button><button type="button" disabled={active === items.length - 1} onClick={() => setActive(active + 1)}>Siguiente →</button></div></div></article></div>;
+  return <div className="study-gallery"><div className="study-gallery-head"><div><span className="study-eyebrow">MAPA VISUAL · {label}</span><h2>Infografías para acompañar el video</h2><p className="study-muted">Míralas en orden y trata de explicar la idea central antes de avanzar.</p></div><div className="study-progress"><strong>{progress}%</strong><span>recorrido visual</span></div></div><div className="study-tabs">{items.map((entry, index) => <button type="button" className={active === index ? "is-active" : ""} onClick={() => setActive(index)} key={entry.title}><span>{index + 1}</span>{entry.title}</button>)}</div><article className="study-infographic-card"><div className="study-infographic-image"><button type="button" className="study-infographic-zoom" onClick={() => setIsOpen(true)} aria-label={`Ampliar: ${item.title}`}><Image src={item.src} alt={item.title} width={2048} height={1536} priority={active === 0} /><span><Maximize2 size={17} /> Ampliar imagen</span></button></div><div className="study-infographic-copy"><span className="study-eyebrow">INFOGRAFÍA {active + 1} DE {items.length}</span><h3>{item.title}</h3><p>{item.caption}</p><div className="study-observe"><strong>Mientras observas, pregúntate:</strong><p>{item.question}</p></div><div className="study-nav"><button type="button" disabled={active === 0} onClick={() => setActive(active - 1)}>← Anterior</button><button type="button" disabled={active === items.length - 1} onClick={() => setActive(active + 1)}>Siguiente →</button></div></div></article>{isOpen ? <div className="study-lightbox" role="dialog" aria-modal="true" aria-label={item.title} onClick={() => setIsOpen(false)}><div className="study-lightbox-content" onClick={(event) => event.stopPropagation()}><button type="button" className="study-lightbox-close" onClick={() => setIsOpen(false)}><X size={20} /> Cerrar</button><Image src={item.src} alt={item.title} width={2048} height={1536} /></div></div> : null}</div>;
 }
 
 export default function Page() {

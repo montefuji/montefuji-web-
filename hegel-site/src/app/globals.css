@@ -1297,6 +1297,13 @@ img { max-width: 100%; }
 .study-infographic-card { display:grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr); border:1px solid #d7cfbf; background:#fffdf9; }
 .study-infographic-image { min-height:550px; padding:20px; display:flex; align-items:center; justify-content:center; background:#f1eee7; }
 .study-infographic-image img { width:100%; height:auto; max-height:760px; object-fit:contain; }
+.study-infographic-zoom { position:relative; width:100%; border:0; padding:0; background:transparent; cursor:zoom-in; }
+.study-infographic-zoom > span { position:absolute; right:12px; bottom:12px; display:inline-flex; align-items:center; gap:6px; border-radius:999px; padding:8px 10px; color:#fff; background:rgba(23,45,79,.88); font-size:12px; font-weight:700; opacity:0; transition:opacity .2s; }
+.study-infographic-zoom:hover > span, .study-infographic-zoom:focus-visible > span { opacity:1; }
+.study-lightbox { position:fixed; z-index:100; inset:0; display:flex; align-items:center; justify-content:center; padding:28px; background:rgba(8,20,34,.9); cursor:zoom-out; }
+.study-lightbox-content { position:relative; max-width:min(1800px, 96vw); max-height:94vh; cursor:default; }
+.study-lightbox-content img { display:block; width:auto; max-width:100%; height:auto; max-height:90vh; border-radius:3px; }
+.study-lightbox-close { position:absolute; top:12px; right:12px; display:inline-flex; align-items:center; gap:6px; border:0; border-radius:999px; padding:9px 12px; color:#fff; background:rgba(23,45,79,.9); font-size:13px; font-weight:700; cursor:pointer; }
 .study-infographic-copy { padding:38px 32px; display:flex; flex-direction:column; justify-content:center; }
 .study-infographic-copy h3 { margin:12px 0; font:700 31px/1.12 Georgia,serif; }
 .study-infographic-copy > p { color:var(--ink-soft); line-height:1.6; }
