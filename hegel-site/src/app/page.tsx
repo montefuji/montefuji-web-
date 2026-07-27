@@ -36,6 +36,17 @@ const KEY_IDEAS = [
   ["04", "El bien común hace posible mi bien", "La libertad y el proyecto personal necesitan condiciones sociales que dependen también de otros."],
 ];
 
+const SECOND_PART_IDEAS = [
+  ["01", "Costumbres e instituciones", "Las costumbres son la forma inmediata en que la voluntad sustancial se objetiva; sobre ellas se construyen la constitución, las leyes y la institucionalidad."],
+  ["02", "Reconocimiento y autoconciencia", "El individuo puede reconocerse en las costumbres, saberlas, quererlas y actuar de acuerdo con ellas, en vez de vivirlas como un poder extraño."],
+  ["03", "Pertenencia y sentimiento", "El vínculo con el pueblo aparece primero como sentimiento de pertenencia y fraternidad: no solo quiero que me vaya bien, sino que nos vaya bien a todos."],
+  ["04", "Virtud política", "La virtud política consiste en querer conscientemente el bien general y contribuir libremente a la obra común, sin abandonar los fines particulares."],
+  ["05", "El Estado como vida del espíritu", "El Estado es una totalidad viva: existe en las acciones, vidas y productos de los individuos que lo componen."],
+  ["06", "La libertad más alta", "La libertad se amplía cuando el individuo comprende que su realización particular también contribuye a la realización de la comunidad."],
+  ["07", "El deber de ser miembro", "El deber de ser miembro del Estado no significa obediencia ciega, sino participar conscientemente en una vida común orientada al bien general."],
+  ["08", "Dos extremos criticados", "Hegel cuestiona tanto el contractualismo de Rousseau como la visión conservadora de von Haller como fundamentos suficientes del Estado."],
+];
+
 function VideoSlot() {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [fileName, setFileName] = useState("");
@@ -78,6 +89,35 @@ function VideoSlot() {
           </label>
         </>
       )}
+    </div>
+  );
+}
+
+function SecondVideoSlot() {
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [fileName, setFileName] = useState("");
+
+  useEffect(() => () => { if (videoUrl) URL.revokeObjectURL(videoUrl); }, [videoUrl]);
+
+  function onVideoChange(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    if (videoUrl) URL.revokeObjectURL(videoUrl);
+    setVideoUrl(URL.createObjectURL(file));
+    setFileName(file.name);
+  }
+
+  return (
+    <div className="study-video-card">
+      <div className="study-video-head">
+        <div>
+          <span className="study-eyebrow">SEGUNDA PARTE DE LA CLASE</span>
+          <h2>Costumbres, pertenencia y virtud política</h2>
+          <p>Este espacio queda preparado para incorporar el nuevo video. Mientras tanto, puedes seleccionar el archivo desde tu equipo para revisarlo.</p>
+        </div>
+        <FileVideo aria-hidden="true" size={32} />
+      </div>
+      {videoUrl ? <div className="study-video-player"><video controls src={videoUrl} /><div className="study-file-row"><span>{fileName}</span><button type="button" onClick={() => { setVideoUrl(null); setFileName(""); }}>Cambiar video</button></div></div> : <label className="study-upload-zone"><PlayCircle size={42} strokeWidth={1.5} /><strong>Seleccionar el nuevo video</strong><span>MP4, WebM o MOV · se reproduce solo en este navegador</span><input type="file" accept="video/*" onChange={onVideoChange} /></label>}
     </div>
   );
 }
@@ -129,6 +169,12 @@ export default function Page() {
       <section id="ruta" className="study-route"><div><span className="study-eyebrow">RUTA DE APRENDIZAJE</span><h2>Cuatro pasos para seguir la clase</h2></div><div className="study-route-grid">{[["01", "Mira", "el video"], ["02", "Observa", "las conexiones"], ["03", "Relaciona", "las ideas"], ["04", "Responde", "las preguntas"]].map(([number, title, detail]) => <div className="study-route-step" key={number}><b>{number}</b><strong>{title}</strong><span>{detail}</span></div>)}</div></section>
 
       <section id="video" className="study-section"><VideoSlot /></section>
+
+      <section id="segunda-parte" className="study-section study-second-part">
+        <div className="study-section-title"><BookOpen size={24} /><div><span className="study-eyebrow">CONTINUACIÓN DE LA CLASE</span><h2>Segunda parte: el Estado como vida común</h2><p className="study-muted">En esta parte, Hegel profundiza en cómo la voluntad sustancial se vuelve costumbre, institución, pertenencia y virtud política.</p></div></div>
+        <SecondVideoSlot />
+        <div className="study-idea-grid study-second-ideas">{SECOND_PART_IDEAS.map(([number, title, text]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
+      </section>
 
       <section className="study-section study-ideas"><div className="study-section-title"><Lightbulb size={24} /><div><span className="study-eyebrow">ANTES DE CONTINUAR</span><h2>Cuatro ideas para tener presentes</h2></div></div><div className="study-idea-grid">{KEY_IDEAS.map(([number, title, text]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>
 
