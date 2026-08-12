@@ -1334,9 +1334,25 @@ img { max-width: 100%; }
 .study-finish p { max-width:700px; margin:10px 0 0; color:#d6dfeb; font-size:14px; line-height:1.5; }
 .study-finish button { display:flex; align-items:center; gap:6px; margin-left:auto; padding:10px 0; white-space:nowrap; color:#b9d3b5; }
 .study-footer { max-width:1124px; margin:auto; padding:0 28px 35px; color:var(--ink-soft); font-size:12px; }
+.study-class--august { background:linear-gradient(180deg,#f7f8f4 0%,#fff 100%); border-top:1px solid #d7cfbf; }
+.study-session-intro { max-width:780px; margin-bottom:30px; }
+.study-session-intro h2 { margin:10px 0 12px; font:700 32px/1.12 Georgia,serif; }
+.study-session-intro p { margin:0; color:var(--ink-soft); font-size:15px; line-height:1.65; }
+.study-upload-card { display:flex; align-items:flex-start; gap:18px; min-height:150px; padding:24px; border:1px dashed #9caf9e; background:#fbfdf9; }
+.study-upload-icon { display:grid; place-items:center; flex:0 0 auto; width:50px; height:50px; color:var(--green); border-radius:50%; background:#e6efe5; }
+.study-upload-card h3 { margin:8px 0 8px; font:700 20px/1.2 Georgia,serif; }
+.study-upload-card p { margin:0; color:var(--ink-soft); font-size:13px; line-height:1.5; }
+.study-upload-card small { display:block; margin-top:12px; color:#8a8174; font-size:11px; }
+.study-video-stack { display:grid; gap:15px; }
+.study-guided-route--august { margin:30px 0; }
+.study-august-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin-top:30px; }
+.study-session-synthesis { margin-top:30px; padding:26px; border:1px solid #c7d5c3; background:#eef4eb; }
+.study-session-synthesis h2 { margin:9px 0 8px; font:700 25px/1.2 Georgia,serif; }
+.study-session-synthesis p { max-width:780px; margin:0; color:var(--ink-soft); line-height:1.6; }
 .study-class-nav { display:flex; gap:14px; }
 .study-class-nav a { color:var(--ink); font-size:13px; font-weight:700; text-decoration:none; }
 .study-class-nav a:hover { color:var(--green); }
+@media (max-width: 800px) { .study-august-grid { grid-template-columns:1fr; } }
 .study-class { border-top:1px solid #dcd2c2; }
 .study-class--second { background:#f1f3ed; }
 .study-excursus { background:#f7f1e4; border-top:3px solid #9a5a25; }
