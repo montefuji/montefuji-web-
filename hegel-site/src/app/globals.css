@@ -1343,6 +1343,7 @@ img { max-width: 100%; }
 .study-upload-card h3 { margin:8px 0 8px; font:700 20px/1.2 Georgia,serif; }
 .study-upload-card p { margin:0; color:var(--ink-soft); font-size:13px; line-height:1.5; }
 .study-upload-card small { display:block; margin-top:12px; color:#8a8174; font-size:11px; }
+.study-upload-link { display:inline-flex; align-items:center; gap:7px; margin-top:14px; color:var(--green); font-size:13px; font-weight:800; text-decoration:none; }
 .study-video-stack { display:grid; gap:15px; }
 .study-guided-route--august { margin:30px 0; }
 .study-august-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin-top:30px; }

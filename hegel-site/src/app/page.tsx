@@ -9,6 +9,7 @@ type Idea = [string, string, string];
 
 const CLASS_1_VIDEO = "https://udeconce.sharepoint.com/:u:/r/sites/TesisFilosofadelDerecho/SitePages/Clase-parte1.aspx?csf=1&web=2&share=IQDsel2uiuFBS7oPBl4YdnzjAXH5xa-u7ejZtZ8zxiSYABg&e=IeyhR8";
 const CLASS_2_VIDEO = "https://udeconce.sharepoint.com/:v:/s/TesisFilosofadelDerecho/IQDwhFa-xF8XTqGye7Yu7sxNATB-iL3aX0zHasSwMv3T9qo?e=pqAC4o&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D";
+const CLASS_12_VIDEO_2 = "https://udeconce.sharepoint.com/:v:/s/TesisFilosofadelDerecho/IQBV53hqL71qSZ8qhJ9Xw4n1Ad9kt8OMZujHRZXRNZo08Tc?e=SeIXlC&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D";
 
 const CLASS_1_IDEAS: Idea[] = [
   ["01", "El Estado es realidad efectiva", "La idea ética se vuelve concreta en instituciones, costumbres, leyes y prácticas de la vida común."],
@@ -82,9 +83,10 @@ const AUGUST_12_INFOGRAPHICS: Infographic[] = [
   { src: "/infografias/clase-12/03_ley_fundamental_instituciones.png", title: "5. Ley fundamental e instituciones", caption: "La contingencia permanece como amenaza constitutiva; por eso la voluntad sustancial debe objetivarse en una ley fundamental y en instituciones capaces de resguardar lo universal.", question: "¿Cómo pueden las instituciones impedir que un interés particular capture la forma del bien común?" },
 ];
 
-function ReservedUpload({ kind, title, description }: { kind: "video" | "infographic"; title: string; description: string }) {
+function ReservedUpload({ kind, title, description, url }: { kind: "video" | "infographic"; title: string; description: string; url?: string }) {
   const Icon = kind === "video" ? UploadCloud : ImagePlus;
-  return <div className="study-upload-card"><div className="study-upload-icon"><Icon size={28} /></div><div><span className="study-eyebrow">ESPACIO RESERVADO</span><h3>{title}</h3><p>{description}</p><small>El archivo se incorporará en una próxima actualización.</small></div></div>;
+  const resolvedUrl = url ?? (title.includes("Parte 2") ? CLASS_12_VIDEO_2 : undefined);
+  return <div className="study-upload-card"><div className="study-upload-icon"><Icon size={28} /></div><div><span className="study-eyebrow">{resolvedUrl ? "VIDEO DISPONIBLE" : "ESPACIO RESERVADO"}</span><h3>{title}</h3><p>{description}</p>{resolvedUrl ? <a className="study-upload-link" href={resolvedUrl} target="_blank" rel="noreferrer"><PlayCircle size={16} /> Abrir video en SharePoint</a> : <small>El archivo se incorporará en una próxima actualización.</small>}</div></div>;
 }
 
 function VideoCard({ classNumber, title, description, url }: { classNumber: string; title: string; description: string; url: string }) {
