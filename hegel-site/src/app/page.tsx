@@ -10,6 +10,7 @@ type Idea = [string, string, string];
 const CLASS_1_VIDEO = "https://udeconce.sharepoint.com/:u:/r/sites/TesisFilosofadelDerecho/SitePages/Clase-parte1.aspx?csf=1&web=2&share=IQDsel2uiuFBS7oPBl4YdnzjAXH5xa-u7ejZtZ8zxiSYABg&e=IeyhR8";
 const CLASS_2_VIDEO = "https://udeconce.sharepoint.com/:v:/s/TesisFilosofadelDerecho/IQDwhFa-xF8XTqGye7Yu7sxNATB-iL3aX0zHasSwMv3T9qo?e=pqAC4o&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D";
 const CLASS_12_VIDEO_2 = "https://udeconce.sharepoint.com/:v:/s/TesisFilosofadelDerecho/IQBV53hqL71qSZ8qhJ9Xw4n1Ad9kt8OMZujHRZXRNZo08Tc?e=SeIXlC&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D";
+const CLASS_12_VIDEO_1 = "https://udeconce.sharepoint.com/:v:/s/TesisFilosofadelDerecho/IQB29objQjyMQ65hcFCA5kuNAR5DNbxwyIFunUt5AS3MUSI?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=s5gu9r";
 
 const CLASS_1_IDEAS: Idea[] = [
   ["01", "El Estado es realidad efectiva", "La idea ética se vuelve concreta en instituciones, costumbres, leyes y prácticas de la vida común."],
@@ -85,7 +86,7 @@ const AUGUST_12_INFOGRAPHICS: Infographic[] = [
 
 function ReservedUpload({ kind, title, description, url }: { kind: "video" | "infographic"; title: string; description: string; url?: string }) {
   const Icon = kind === "video" ? UploadCloud : ImagePlus;
-  const resolvedUrl = url ?? (title.includes("Parte 2") ? CLASS_12_VIDEO_2 : undefined);
+  const resolvedUrl = url ?? (title.includes("Parte 1") ? CLASS_12_VIDEO_1 : title.includes("Parte 2") ? CLASS_12_VIDEO_2 : undefined);
   return <div className="study-upload-card"><div className="study-upload-icon"><Icon size={28} /></div><div><span className="study-eyebrow">{resolvedUrl ? "VIDEO DISPONIBLE" : "ESPACIO RESERVADO"}</span><h3>{title}</h3><p>{description}</p>{resolvedUrl ? <a className="study-upload-link" href={resolvedUrl} target="_blank" rel="noreferrer"><PlayCircle size={16} /> Abrir video en SharePoint</a> : <small>El archivo se incorporará en una próxima actualización.</small>}</div></div>;
 }
 
