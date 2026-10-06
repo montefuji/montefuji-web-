@@ -762,7 +762,7 @@ export default function Page() {
       </div>
 
       <div className="local-seo-links">
-        {SEO_LANDING_PAGES.map((page) => (
+        {SEO_LANDING_PAGES.filter((page) => page.showOnHome !== false).map((page) => (
           <Link key={page.slug} href={`/${page.slug}`}>
             {page.metaTitle} <ChevronRight size={14} />
           </Link>

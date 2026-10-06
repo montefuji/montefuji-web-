@@ -31,7 +31,7 @@ function landingJsonLd(page: NonNullable<ReturnType<typeof getSeoLandingPage>>) 
         "@id": `${pageUrl}#service`,
         name: page.title,
         description: page.metaDescription,
-        serviceType: "Direccion hidraulica automotriz",
+        serviceType: page.serviceType ?? "Direccion hidraulica automotriz",
         areaServed: [
           { "@type": "City", name: "Concepcion" },
           { "@type": "AdministrativeArea", name: "Biobio" },
@@ -246,7 +246,7 @@ export default async function SeoLandingPage({ params }: PageParams) {
                 <div className="kicker">SÍNTOMAS</div>
                 <h2 className="h2">¿Tu vehículo presenta?</h2>
                 <p className="p" style={{ marginTop: 10 }}>
-                  Si aparece uno de estos síntomas, conviene revisar antes de que el daño avance.
+                  {page.symptomsDescription ?? "Si aparece uno de estos síntomas, conviene revisar antes de que el daño avance."}
                 </p>
               </div>
 
@@ -274,6 +274,19 @@ export default async function SeoLandingPage({ params }: PageParams) {
           </div>
         </section>
 
+        {page.serviceSections?.map((section) => (
+          <section className="section white" key={section.title}>
+            <div className="container">
+              <h2 className="h2">{section.title}</h2>
+              {section.paragraphs.map((paragraph) => (
+                <p className="p" style={{ marginTop: 10 }} key={paragraph}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </section>
+        ))}
+
         <section className="section soft">
           <div className="container">
             <div className="landing-columns">
@@ -283,7 +296,7 @@ export default async function SeoLandingPage({ params }: PageParams) {
                   <div>
                     <div style={{ fontSize: 14, fontWeight: 600 }}>Qué revisamos</div>
                     <p className="p" style={{ marginTop: 4 }}>
-                      Validamos aplicación antes de vender o recomendar el servicio.
+                      {page.checksDescription ?? "Validamos aplicación antes de vender o recomendar el servicio."}
                     </p>
                   </div>
                 </div>
@@ -300,7 +313,7 @@ export default async function SeoLandingPage({ params }: PageParams) {
                   <div>
                     <div style={{ fontSize: 14, fontWeight: 600 }}>Datos para cotizar</div>
                     <p className="p" style={{ marginTop: 4 }}>
-                      Mientras más completa llegue la información, más precisa será la respuesta.
+                      {page.quoteDescription ?? "Mientras más completa llegue la información, más precisa será la respuesta."}
                     </p>
                   </div>
                 </div>

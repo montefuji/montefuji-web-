@@ -19,9 +19,101 @@ export type SeoLandingPage = {
   heroImageStyle?: "default" | "plain";
   technicalTitle?: string;
   technicalParagraphs?: string[];
+  showOnHome?: boolean;
+  serviceType?: string;
+  symptomsDescription?: string;
+  checksDescription?: string;
+  quoteDescription?: string;
+  serviceSections?: { title: string; paragraphs: string[] }[];
 };
 
 export const SEO_LANDING_PAGES: SeoLandingPage[] = [
+  {
+    slug: "reparacion-cremalleras-direccion-concepcion",
+    title: "Reparación de cremalleras de dirección en Concepción",
+    metaTitle: "Reparación de cremalleras en Concepción",
+    metaDescription: "Reparación de cremalleras hidráulicas en Concepción. Evaluación, recuperación de vástago según su estado y prueba de estanqueidad a 120 bar.",
+    eyebrow: "CREMALLERAS HIDRÁULICAS",
+    intro: "En Montefuji evaluamos y reparamos cremalleras de dirección hidráulica en Concepción. Recibimos vehículos completos en el taller y también cremalleras desmontadas, entregadas fuera del vehículo.",
+    vehicle: "Taller: Colo Colo 922 · Atención comercial: Salas 566, Concepción.",
+    technicalTitle: "Evaluación antes de reparar",
+    technicalParagraphs: [
+      "La reparación se define según el estado real del conjunto. Nuestro criterio es determinar si la intervención puede devolverle condiciones de funcionamiento seguras y duraderas."
+    ],
+    symptoms: [
+      "Fuga de líquido de dirección",
+      "Juego o golpes en la dirección",
+      "Dureza al girar el volante",
+      "Retorno irregular del volante"
+    ],
+    symptomsDescription: "Estos síntomas justifican una evaluación, pero no identifican por sí solos una falla de cremallera. También puede ser necesario revisar la bomba, las mangueras, el fluido y los componentes asociados.",
+    checks: [
+      "Fugas y estanqueidad del conjunto",
+      "Estado de los sellos",
+      "Juego y condición del vástago"
+    ],
+    checksDescription: "Revisamos el estado real de la cremallera para definir la intervención.",
+    quoteData: [
+      "Marca, modelo, año, motor y VIN, si lo tienes",
+      "Síntoma y condiciones en que aparece",
+      "Fotografías de la cremallera o de la fuga, si están disponibles",
+      "Si ingresarás el vehículo completo o entregarás la cremallera desmontada"
+    ],
+    quoteDescription: "Con esa información podemos orientar la consulta. La recomendación de reparar o reemplazar depende de la evaluación del conjunto.",
+    related: [
+      "direccion-hidraulica-concepcion",
+      "sistemas-de-direccion-concepcion"
+    ],
+    keywords: [
+      "reparación de cremalleras de dirección en Concepción"
+    ],
+    whatsappText: "Hola Montefuji, necesito solicitar evaluación o cotización de una cremallera hidráulica.\n\nVehículo:\nVIN:\nAño:\nMotor:\nSíntoma y cuándo aparece:\nVehículo completo o cremallera desmontada:\nFotografías:",
+    heroImage: "/montefuji-carousel-07.jpg",
+    heroImageAlt: "Reparación de cremallera de dirección hidráulica en Montefuji",
+    heroImageWidth: 1694,
+    heroImageHeight: 929,
+    heroImageStyle: "plain",
+    showOnHome: false,
+    serviceType: "Reparación y reacondicionamiento de cremalleras hidráulicas",
+    serviceSections: [
+      {
+        title: "Evaluación y reacondicionamiento de la cremallera",
+        paragraphs: [
+          "Revisamos fugas, estado de los sellos, juego y condición del vástago para definir la intervención.",
+          "El trabajo puede incluir reemplazo de sellos y recuperación del vástago. Según el estado del componente, esta recuperación puede realizarse mediante rectificado o cromado. No se aplica el mismo procedimiento a todas las piezas."
+        ]
+      },
+      {
+        title: "¿Cuándo reparar y cuándo reemplazar?",
+        paragraphs: [
+          "Reparamos una cremallera cuando, después de evaluarla, consideramos que la intervención puede devolverle condiciones de funcionamiento seguras y duraderas.",
+          "Cuando el deterioro no permite asegurar esas condiciones después de la reparación, recomendamos reemplazarla. La decisión depende del estado real de la pieza; no basta con identificar una fuga para determinar la solución."
+        ]
+      },
+      {
+        title: "Prueba hidráulica del sellado a 120 bar",
+        paragraphs: [
+          "Después del sellado y reacondicionamiento, sometemos la cremallera a una prueba hidráulica a 120 bar para comprobar que el conjunto reparado resiste esa presión sin pérdida de estanqueidad.",
+          "Es una prueba de exigencia del sellado realizada a 120 bar. Esta presión corresponde al procedimiento de prueba del taller y no debe interpretarse como la presión normal de funcionamiento de todos los sistemas de dirección hidráulica."
+        ]
+      },
+      {
+        title: "Vehículo completo o cremallera desmontada",
+        paragraphs: [
+          "Con el vehículo completo: además de intervenir la cremallera, podemos revisar el sistema de dirección hidráulica asociado y comprobar su funcionamiento en el vehículo una vez instalada.",
+          "Con la cremallera desmontada: recibimos el componente entregado fuera del vehículo. La evaluación se limita a la pieza entregada y a sus pruebas de taller; no incluye comprobar el resto del sistema ni su funcionamiento en el vehículo."
+        ]
+      },
+      {
+        title: "Ubicación y recepción",
+        paragraphs: [
+          "Taller: Colo Colo 922, Concepción.",
+          "Atención comercial: Salas 566, Concepción.",
+          "Contáctanos para coordinar el ingreso del vehículo o la entrega de la cremallera."
+        ]
+      }
+    ]
+  },
   {
     slug: "homocineticas-concepcion",
     title: "Homocinéticas en Concepción",
