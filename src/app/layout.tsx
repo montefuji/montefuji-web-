@@ -209,8 +209,6 @@ const businessJsonLd = {
     "Diagnóstico de dirección automotriz",
   ],
   makesOffer: [
-    { "@type": "Offer", itemOffered: { "@type": "Product", name: "Juntas homocinéticas" } },
-    { "@type": "Offer", itemOffered: { "@type": "Product", name: "Semiejes" } },
     { "@type": "Offer", itemOffered: { "@type": "Service", name: "Reparación de dirección hidráulica" } },
   ],
 };

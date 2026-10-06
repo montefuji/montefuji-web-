@@ -38,21 +38,7 @@ function landingJsonLd(page: NonNullable<ReturnType<typeof getSeoLandingPage>>) 
         ],
         provider: { "@id": absoluteUrl("/#montefuji") },
       }
-    : {
-        "@type": "Product",
-        "@id": `${pageUrl}#product`,
-        name: page.title,
-        description: page.metaDescription,
-        image: absoluteUrl(page.heroImage),
-        brand: { "@type": "Brand", name: "Montefuji" },
-        category: "Autopartes",
-        offers: {
-          "@type": "Offer",
-          availability: "https://schema.org/InStock",
-          priceCurrency: "CLP",
-          seller: { "@id": absoluteUrl("/#montefuji") },
-        },
-      };
+    : null;
 
   return {
     "@context": "https://schema.org",
@@ -65,7 +51,7 @@ function landingJsonLd(page: NonNullable<ReturnType<typeof getSeoLandingPage>>) 
         description: page.metaDescription,
         inLanguage: "es-CL",
         isPartOf: { "@id": absoluteUrl("/#website") },
-        about: { "@id": mainEntity["@id"] },
+        ...(mainEntity ? { about: { "@id": mainEntity["@id"] } } : {}),
         primaryImageOfPage: {
           "@type": "ImageObject",
           url: absoluteUrl(page.heroImage),
@@ -92,7 +78,7 @@ function landingJsonLd(page: NonNullable<ReturnType<typeof getSeoLandingPage>>) 
           },
         ],
       },
-      mainEntity,
+      ...(mainEntity ? [mainEntity] : []),
     ],
   };
 }
