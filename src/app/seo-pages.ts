@@ -29,6 +29,65 @@ export type SeoLandingPage = {
 
 export const SEO_LANDING_PAGES: SeoLandingPage[] = [
   {
+    slug: "homocineticas-honda-concepcion",
+    title: "Homocinéticas Honda en Concepción",
+    metaTitle: "Homocinéticas Honda en Concepción",
+    metaDescription: "Homocinéticas Honda en Concepción. Identificación de juntas exteriores, interiores y semiejes según los antecedentes del vehículo y la pieza.",
+    eyebrow: "HOMOCINÉTICAS HONDA",
+    intro: "En Montefuji trabajamos homocinéticas Honda en Concepción. Antes de confirmar una pieza, revisamos los antecedentes disponibles: pueden existir distintas aplicaciones dentro de un mismo modelo y año.",
+    vehicle: "Identificación técnica antes de confirmar la pieza.",
+    technicalTitle: "Modelos Honda que trabajamos",
+    technicalParagraphs: [
+      "Honda Civic · Honda CR-V · Honda HR-V · Honda Accord · Honda City · Honda Jazz / Fit.",
+      "La agrupación de Jazz / Fit no supone que ambos compartan piezas ni aplicaciones."
+    ],
+    symptoms: [
+      "Ruido al doblar",
+      "Vibración al acelerar",
+      "Fuelle roto o pérdida de grasa"
+    ],
+    symptomsDescription: "Indícanos el síntoma o el motivo del reemplazo. Si no sabes qué componente necesitas, podemos orientar la consulta con los antecedentes disponibles.",
+    checks: [
+      "Antecedentes disponibles del vehículo y la pieza",
+      "Lado y posición cuando corresponda",
+      "Revisión, comparación o medición de la pieza desmontada cuando sea necesario"
+    ],
+    checksDescription: "La compatibilidad no se confirma únicamente por modelo y año.",
+    quoteData: [
+      "Modelo y año",
+      "Síntoma o motivo del reemplazo",
+      "Lado y componente buscado, si los conoces",
+      "Fotografías disponibles",
+      "VIN, motor, transmisión y posición, según necesidad",
+      "Fotografías y medidas de la pieza desmontada, o revisión del componente, cuando sea necesario"
+    ],
+    quoteDescription: "Envía los datos que tengas. Si falta información para confirmar la pieza, te indicaremos qué antecedente adicional necesitamos. Una fotografía puede orientar la identificación, pero no siempre permite confirmar compatibilidad.",
+    related: [
+      "homocineticas-concepcion",
+      "fuelle-homocinetica-concepcion"
+    ],
+    keywords: [
+      "homocinéticas Honda en Concepción"
+    ],
+    whatsappText: "Hola Montefuji, necesito consultar por una homocinética Honda.\n\nModelo:\nAño:\nSíntoma o motivo del reemplazo:\nLado y posición, si los conozco:\nVIN, si lo tengo:\nMotor:\nTransmisión:\nFotografías disponibles:",
+    heroImage: "/montefuji-product-cv-kit.webp",
+    heroImageAlt: "Kit de junta homocinética",
+    heroImageWidth: 1086,
+    heroImageHeight: 1448,
+    showOnHome: false,
+    serviceSections: [
+      {
+        title: "Identificamos la aplicación antes de confirmar la pieza",
+        paragraphs: [
+          "Dentro de un mismo modelo y año pueden existir distintas aplicaciones. Por eso no confirmamos compatibilidad únicamente con esos dos datos.",
+          "Cuando corresponde, distinguimos entre junta homocinética exterior, junta interior y semieje completo. Identificar cuál se necesita forma parte de la consulta.",
+          "Revisamos los antecedentes disponibles y podemos solicitar VIN, año, motor, transmisión, lado, posición y fotografías. En algunos casos, la confirmación definitiva requiere comparar, revisar o medir la pieza desmontada.",
+          "El estriado tampoco debe darse por confirmado de antemano. Cuando los antecedentes no permiten identificar la aplicación con seguridad, necesitamos completar la revisión antes de recomendar una pieza."
+        ]
+      }
+    ]
+  },
+  {
     slug: "reparacion-cremalleras-direccion-concepcion",
     title: "Reparación de cremalleras de dirección en Concepción",
     metaTitle: "Reparación de cremalleras en Concepción",
